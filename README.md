@@ -31,5 +31,54 @@ Ink CSS Framework Alternative
 <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/autoload.js"></script>
 optional - CAPTCHA
 
+20 characters, 20 questions, 4 answers per question
+
+var Characters = [
+    'Thor',
+    'Wolverine',
+    'Havok',
+    'Nightcraweler',
+    'Mystique',
+    'Cable',
+    'Deadpool',
+    'Rogue',
+    'Phoenix',
+    'Iron Man',
+    'Hulk',
+    'Peter Quill',
+    'Rocket',
+    'The Collector',
+    'Loki',
+    'Redskull',
+    'Ronan',
+    'Dr. Doom',
+    'Captain America',
+    'Vision',
+    'Dr. Strange'
+]
+
+var Questions = [
+    'What is your favorite color?',
+    'If you were a tree, what tree would you be?',
+    'What is your favorite weapon?',
+    'Which Vehicle would you choose?',
+    'What would you do if you caught someone stealing?',
+    'What is your personality?',
+    'Who would you work with?',
+    'Which superpower is the coolest?',
+    'What is your spirit animal?',
+    'Where would you live?',
+    'Where would you vacation?',
+    'What are you afraid of?',
+    'How long is your hair?',
+    'What is your relationship with your parents?',
+    'Who is your sidekick?',
+    'Who would you be a sidekick to?',
+    'What do you do in your freetime?',
+    'How many licks does it take to get the center of a lollipop?',
+    'What hogwarts house do you below too?',
+    'What time do you wake up in the morning?'
+]
+
 
 
