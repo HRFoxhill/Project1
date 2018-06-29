@@ -57,6 +57,10 @@ var Characters = [
     'Dr. Strange'
 ]
 
+
+Technology, Magic/Mystical, Brute Strength, Normal
+
+
 var Questions = [
     'What is your favorite color?',
     'If you were a tree, what tree would you be?',
