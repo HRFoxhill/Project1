@@ -57,6 +57,10 @@ var Characters = [
     'Doctor Strange' // correct to Doctor for API search purpose
 ]
 
+
+Technology, Magic/Mystical, Brute Strength, Normal
+
+
 var Questions = [
     'What is your favorite color?',
     'If you were a tree, what tree would you be?',
