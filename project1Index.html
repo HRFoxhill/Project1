@@ -16,98 +16,86 @@
 </head>
 
 <body>
-    <Header>
-        <!-- navbar -->
-        <nav class="ink-navigation">
+<Header>
+       <!-- navbar -->
+       <nav class="ink-navigation">
             <ul class="menu horizontal black">
-                <li class="heading">
-                    <a href="#">Home</a>
-                </li>
+                <li class="heading"><a href="#">Home</a></li>
                 <li>
                     <a href="#">Contributor Pages</a>
                     <ul class="submenu">
-                        <li>
-                            <a href="#">Edison</a>
-                        </li>
-                        <li>
-                            <a href="#">Heather</a>
-                        </li>
-                        <li>
-                            <a href="#">Luke</a>
-                        </li>
-                        <li>
-                            <a href="#">Nic</a>
-                        </li>
+                        <li><a href="#">Edison</a></li>
+                        <li><a href="#">Heather</a></li>
+                        <li><a href="#">Luke</a></li>
+                        <li><a href="#">Nic</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
+                <li><a href="#">About</a></li>
             </ul>
         </nav>
-    </Header>
+</Header> 
 
-    <!-- progressbar -->
-    <div class="ink-progress-bar" data-start-value="0">
+ <!-- progressbar -->
+ <div class="ink-progress-bar" data-start-value="0">
         <span class="caption">I am a progress bar</span>
         <div class="bar grey"></div>
     </div>
 
     <!-- modal divs -->
     <div class="ink-shade fade">
-        <div id="myModal" class="ink-modal fade" data-auto-display="true" data-width="25% " data-height="20% " role="dialog "
-            aria-hidden="true " aria-labelled-by="modal-title ">
-            <div class="modal-header ">
-                <button class="modal-close ink-dismiss "></button>
-                <h2 id="modal-title ">A Little About you!</h2>
+        <div id="myModal" class="ink-modal fade" data-auto-display="true" data-width="50%" data-height="50%" role="dialog"
+            aria-hidden="true" aria-labelled-by="modal-title">
+            <div class="modal-header">
+                <button class="modal-close ink-dismiss"></button>
+                <h2 id="modal-title">A Little About you!</h2>
             </div>
-            <div class="modal-body " id="modalContent ">
-                <form class="ink-form ">
-                        <div class="column-group gutters ">
-                            <div class="control-group all-33 required validation error ">
-                                <label for="required-name ">Name</label>
-                                <div class="control ">
-                                    <input type="text " name="name " id="required-name ">
+            <div class="modal-body" id="modalContent">
+                <form class="ink-form">
+                        <div class="column-group gutters">
+                            <div class="control-group all-33 required validation error">
+                                <label for="required-name">Name</label>
+                                <div class="control">
+                                    <input type="text" name="name" id="required-name">
                                 </div>
-                                <p class="tip ">This field is required</p>
+                                <p class="tip">This field is required</p>
                             </div>
-                            <div class="control-group all-33 ">
-                                <label for="phone ">Phone</label>
-                                <div class="control ">
-                                    <input type="text " name="phone " id="phone ">
+                            <div class="control-group all-33">
+                                <label for="phone">Phone</label>
+                                <div class="control">
+                                    <input type="text" name="phone" id="phone">
                                 </div>
                             </div>
-                            <div class="control-group all-33 required validation error ">
-                                <label for="required-email2 ">Email</label>
-                                <div class="control ">
-                                    <input type="text " name="email " id="required-email2 " placeholder="name@domain.com ">
+                            <div class="control-group all-33 required validation error">
+                                <label for="required-email2">Email</label>
+                                <div class="control">
+                                    <input type="text" name="email" id="required-email2" placeholder="name@domain.com">
                                 </div>
-                                <p class="tip ">This field is required</p>
+                                <p class="tip">This field is required</p>
                             </div>
                         </div>
-                                    <button class="ink-button green ">Submit</button>
+                                    <button class="ink-button green">Submit</button>
                                 </div>
                             </div>
                         </div>
                     </form>
             </div>
-            <div class="modal-footer ">
+            <div class="modal-footer">
             </div>
         </div>
     </div>
      
 <!-- quiz radio buttons -->
 
-    <form class="ink-form ">
+    <form class="ink-form">
             <fieldset>
                 <legend>Question</legend>
-                <div class="control-group ">
-                    <p class="label ">Please select one of these options</p>
-                    <ul class="control unstyled ">
+                <div class="control-group">
+                    <p class="label">Please select one of these options</p>
+                    <ul class="control unstyled">
 
                         <!-- example of ink radio button code -->
 
-                        <li><input type="radio " id="rb1 " name="rb " value="Ace of Spades "><label for="rb1 ">Ace of Spades</label></li>
+                        <li><input type="radio" id="rb1" name="rb" value="Ace of Spades"><label for="rb1">Ace of Spades</label></li>
                     </ul>
                 </div>
             </fieldset>
@@ -116,13 +104,13 @@
 
   
 <!-- Ink Framework Script Sources -->
-<link rel="stylesheet " type="text/css " href="http://fastly.ink.sapo.pt/3.1.10/css/ink.css "> <!-- inks css file -->
-    <script type="text/javascript " src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js "></script> <!-- inks js bundle -->
+<link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/css/ink.css"> <!-- inks css file -->
+    <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js"></script> <!-- inks js bundle -->
     
-    <script type="text/javascript " src="http://fastly.ink.sapo.pt/3.1.10/js/autoload.js "></script>
+    <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/autoload.js"></script>
 
     <!-- Js -->
-  <script src="quiz.js "></script>
+  <script src="quiz.js"></script>
 </body>
 
 </html>
