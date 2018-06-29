@@ -36,21 +36,21 @@ optional - CAPTCHA
 var Characters = [
     'Thor',
     'Wolverine',
-    'spider-man', 
+    'Black Panther', 
     'DareDevil',
     'Storm',
-    'Cable',
+    'Falcon',
     'Deadpool',
     'Rogue',
-    'Jean grey', 
+    'Phoenix', 
     'Iron Man',
     'Hulk',
-    'Peter Quill',
+    'Groot',
     'Rocket Raccoon', 
     'Magneto', 
     'Loki',
-    'Red skull', // add space on it
-    'Ronan',
+    'Red Skull', // add space on it
+    'Star-Lord',
     'Doctor Doom', // correct to Doctor for API search purpose
     'Captain America',
     'Vision',
