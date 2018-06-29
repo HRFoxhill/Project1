@@ -3,21 +3,234 @@
 // when page loads
 $(document).ready(function () {
 
-    // question array
-    var questions = [ // todo: fill with real question and answer
-        {
-            "question": "What weapon do you use to attack a bug?",
+    // question array (hold our question objects)
+    var questions =[ // todo: fill with real question and answer
 
-            answers: ["","","",""]
+        {
+            question: "What is your favorite color",
+            answer : ["Black", "Red", "Blue", "Green"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
         },
 
+
+        {
+            question: "If you were a tree, what tree would you be?",
+            answer : ["Ash", "Holly", "Evergreen", "Oak", "Maple"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What is your favorite weapon",
+            answer : ["Hammer", "Energy beams", "Gun", "Bare Hands"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "How do you like to travel?",
+            answer : ["Surfboard", "Rollerblades", "None (Teleport)", "Fly"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What would you do if you caught someone stealing",
+            answer : ["Cut off their hand", "Tackle them", "Tell them \"Don't\"", "Ignore it"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What is your defining personality trait?",
+            answer : ["Anger", "Fear", "Justice", "Love"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "How do you like to work",
+            answer : ["Alone", "As a leader", "As an underdog", "With my best friend"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Which superpower is the coolest?",
+            answer : ["Brilliant mind", "Raw strength", "Magic", "Trick shots"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What is your spirit animal?",
+            answer : ["Cheetah", "Elephant", "Dolphin", "Griffin"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Where would you live?",
+            answer : ["Iowa", "Space", "Underground", "Ocean"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Where would you vacation?",
+            answer : ["Baghdad", "Neptune", "Paris", "Artic"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What weapon do you use to attack a bug?",
+            answer : ["Hammer", "Fish", "Spear", "Bare Hands"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What are you afraid of?",
+            answer : ["Spiders", "Cuccumbers", "Bears", "Ghosts"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What hairstyle do you rock?",
+            answer : ["Bald", "Mullet", "Military cut", "Ponytail"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What is your relationship with your parents?",
+            answer : ["I killed them", "See them every holiday", "I never knew them", "They're ok"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Who is your sidekick?",
+            answer : ["Jubilee", "Foggy Nelson", "War machine", "Bucky"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What do you do in your freetime?",
+            answer : ["Read", "Hunt bad guys", "Try take over the world", "Plot revenge"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "How many licks does it take to get the center of a lollipop?",
+            answer : ["364 licks", "I eat it", "I don't eat food", "3"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What hogwarts house do you belog to?",
+            answer : ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What time do you wake up in the morning?",
+            answer : ["At night", "5:00 AM", "Noon o'clock", "10:00 AM"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
         
-        // todo: add all questions
 
-    ];
-
-
-
+        
+       
+    ]; // end questions array
 
     // todo: add questions to dom
 
