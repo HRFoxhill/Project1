@@ -226,13 +226,7 @@ $(document).ready(function () {
                 [],
             ]
         },
-        
-
-        
-       
     ]; // end questions array
-
-    // todo: add questions to dom
 
     // create form 
     var qForm = $("<form>")
@@ -249,7 +243,7 @@ $(document).ready(function () {
         quest.append(questions[ind].question);
 
         // add question 
-        qDiv.append(quest);
+        qDDiv.append(quest);
 
        
         // add answers
@@ -277,15 +271,19 @@ $(document).ready(function () {
         qForm.append(qDiv);
     }
 
-    var SubmitButton = $("<button>")
+    var SubmitButton = $("<button>");
+    SubmitButton.attr("id","submit-answers");
 
-
-
+    // TODO: add quiz to dom
 
 
     //when quiz is submitted
-    $("submit-answers").on("click", function () {
+    $("#submit-answers").on("click", function (event) {
 
+        // makes it not send info
+        event.preventDefault();
+        
+        // initial score, The value of each index represents how much you are like that corresponding character
         var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         // todo: calculate score
