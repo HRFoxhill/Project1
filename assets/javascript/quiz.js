@@ -1,10 +1,30 @@
 
+//Initialize Firebase
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
+    authDomain: "marvelproject-71ef6.firebaseapp.com",
+    databaseURL: "https://marvelproject-71ef6.firebaseio.com",
+    projectId: "marvelproject-71ef6",
+    storageBucket: "marvelproject-71ef6.appspot.com",
+    messagingSenderId: "1070813482024"
+  };
+  
+  firebase.initializeApp(config);
+
+// Assign the reference to the database to a variable named 'database'
+// var database = ...
+  var database = firebase.database()
+
+
 
 // when page loads
 $(document).ready(function () {
 
     // question array (hold our question objects)
     var questions =[ // todo: fill with real question and answer
+
         {
             question: "What is your favorite color",
             answer : ["Black", "Red", "Blue", "Green"],
@@ -15,6 +35,8 @@ $(document).ready(function () {
                 [],
             ]
         },
+
+
         {
             question: "If you were a tree, what tree would you be?",
             answer : ["Ash", "Holly", "Evergreen", "Oak", "Maple"],
@@ -223,52 +245,65 @@ $(document).ready(function () {
                 [],
             ]
         },
-        
-
-        
-       
     ]; // end questions array
-
-
-
-
-    // todo: add questions to dom
 
     // create form 
     var qForm = $("<form>")
 
     // loop through every questions
-    for(var ind in questions){
+    for (var ind in questions) {
 
         // create div for each question
         var qDiv = $("<div>");
         qDiv.addClass("questionDiv");
 
         // create question 
-        var quest = $("<p>");
+        var quest = $("<h3>");
         quest.append(questions[ind].question);
 
-        // add question
-        qDiv.append(quest);
+        // add question 
+        qDDiv.append(quest);
 
-        // add radio button
-        var rad1 = $("<input>")
-        rad1.attr("type","radio");
-        rad1.addclass("radionClass");
+       
+        // add answers
+        for(var j in questions[ind].answers){
 
-               
+            qDiv.append("<br>"); // add break
+
+             // create radio button
+            var radButton = $("<input>")
+            radButton.attr("type", "radio");
+            radButton.addclass("QName", ind); // add name
+            radButton.addclass("ansInd", j); // add an index for each answer
+
+            // add the radio button to the question 
+            qDiv.append(radButton);
+
+            // add answer 
+            qDiv.append(questions[i].answers[j]);
+            qDiv.append("<br>"); // add break
+
+
         }
 
-        var SubmitButton= $("<button>")
+        // add completed question to the form
+        qForm.append(qDiv);
+    }
 
+    var SubmitButton = $("<button>");
+    SubmitButton.attr("id","submit-answers");
 
-
+    // TODO: add quiz to dom
 
 
     //when quiz is submitted
-    $("submit-answers").on("click", function () {
+    $("#submit-answers").on("click", function (event) {
 
-        var userScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        // makes it not send info
+        event.preventDefault();
+        
+        // initial score, The value of each index represents how much you are like that corresponding character
+        var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         // todo: calculate score
 

@@ -42,20 +42,24 @@ var Characters = [
     'Cable',
     'Deadpool',
     'Rogue',
-    'Phoenix',
+    'Jean grey', //Phoenix
     'Iron Man',
     'Hulk',
     'Peter Quill',
-    'Rocket',
-    'The Collector',
+    'Rocket Raccoon', //add raccoon
+    'Magneto', //removes collector to Magneto
     'Loki',
-    'Redskull',
+    'Red skull', // add space on it
     'Ronan',
-    'Dr. Doom',
+    'Doctor Doom', // correct to Doctor for API search purpose
     'Captain America',
     'Vision',
-    'Dr. Strange'
+    'Doctor Strange' // correct to Doctor for API search purpose
 ]
+
+
+Technology, Magic/Mystical, Brute Strength, Normal
+
 
 var Questions = [
     'What is your favorite color?',
