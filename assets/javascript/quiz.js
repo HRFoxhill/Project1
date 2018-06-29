@@ -15,7 +15,6 @@ $(document).ready(function () {
                 [],
             ]
         },
-
         {
             question: "If you were a tree, what tree would you be?",
             answer : ["Ash", "Holly", "Evergreen", "Oak", "Maple"],
