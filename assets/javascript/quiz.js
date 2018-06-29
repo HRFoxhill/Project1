@@ -3,42 +3,232 @@
 // when page loads
 $(document).ready(function () {
 
-    // question array
+    // question array (hold our question objects)
     var questions =[ // todo: fill with real question and answer
         {
-            "question": "What weapon do you use to attack a bug?",
-
-            "ans1": "hammer",
-            "ans1Score": "[...]",
-
-            "ans2": "laser",
-            "ans2Score": "[...]",
-
-            "ans3": "hands",
-            "ans3Score": "[...]",
-
-            "ans4": "flyswatter",
-            "ans4Score": "[...]",
+            question: "What is your favorite color",
+            answer : ["Black", "Red", "Blue", "Green"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
         },
 
         {
-            "question": "Favorite Color",
+            question: "If you were a tree, what tree would you be?",
+            answer : ["Ash", "Holly", "Evergreen", "Oak", "Maple"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
 
-            "ans1": "red",
-            "ans1Score": "[...]",
+        {
+            question: "What is your favorite weapon",
+            answer : ["Hammer", "Energy beams", "Gun", "Bare Hands"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
 
-            "ans2": "blue",
-            "ans2Score": "[...]",
+        {
+            question: "How do you like to travel?",
+            answer : ["Surfboard", "Rollerblades", "None (Teleport)", "Fly"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
 
-            "ans3": "green",
-            "ans3Score": "[...]",
+        {
+            question: "What would you do if you caught someone stealing",
+            answer : ["Cut off their hand", "Tackle them", "Tell them \"Don't\"", "Ignore it"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
 
-            "ans4": "yellow",
-            "ans4Score": "[...]",
-        }
-        // todo: add all questions
+        {
+            question: "What is your defining personality trait?",
+            answer : ["Anger", "Fear", "Justice", "Love"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "How do you like to work",
+            answer : ["Alone", "As a leader", "As an underdog", "With my best friend"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Which superpower is the coolest?",
+            answer : ["Brilliant mind", "Raw strength", "Magic", "Trick shots"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What is your spirit animal?",
+            answer : ["Cheetah", "Elephant", "Dolphin", "Griffin"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Where would you live?",
+            answer : ["Iowa", "Space", "Underground", "Ocean"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Where would you vacation?",
+            answer : ["Baghdad", "Neptune", "Paris", "Artic"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What weapon do you use to attack a bug?",
+            answer : ["Hammer", "Fish", "Spear", "Bare Hands"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What are you afraid of?",
+            answer : ["Spiders", "Cuccumbers", "Bears", "Ghosts"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What hairstyle do you rock?",
+            answer : ["Bald", "Mullet", "Military cut", "Ponytail"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What is your relationship with your parents?",
+            answer : ["I killed them", "See them every holiday", "I never knew them", "They're ok"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "Who is your sidekick?",
+            answer : ["Jubilee", "Foggy Nelson", "War machine", "Bucky"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What do you do in your freetime?",
+            answer : ["Read", "Hunt bad guys", "Try take over the world", "Plot revenge"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "How many licks does it take to get the center of a lollipop?",
+            answer : ["364 licks", "I eat it", "I don't eat food", "3"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What hogwarts house do you belog to?",
+            answer : ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+
+        {
+            question: "What time do you wake up in the morning?",
+            answer : ["At night", "5:00 AM", "Noon o'clock", "10:00 AM"],
+            anScore : [ 
+                [],
+                [],
+                [],
+                [],
+            ]
+        },
+        
+
+        
        
-    ];
+    ]; // end questions array
 
 
 
