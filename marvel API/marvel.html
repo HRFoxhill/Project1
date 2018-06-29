@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>API Marvel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+   
+    <script src="./md5.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <h1>Marvel API</h1>
+<div id="character">
+  <p>Testing Marvel APi</p>
+  <input type="text" id="pickCharacter">  </br>
+  <input type="submit" id="submit"> 
+
+<div id="ajaxResponse"></div>
+
+</div>
+<div class="style1" id="description">
+    blaalalala
+</div>
+</div>
+<div id="imageContainer"></div>
+
+
+    <script>
+        var url=`https://gateway.marvel.com/v1/public/characters`;
+        var publicApi='c145b9201ed1049e19d4af3e04800cd2';
+        var privateApi='55ed8373f83689abfa159f0a80bacf9200e98a31';
+
+        var timestamp;
+        var MD5message;
+
+        timestamp= new Date().getTime();
+
+        var hashTest = md5("Message");
+        
+        var hash=md5(timestamp+privateApi+publicApi).toString();
+        
+
+  $("#submit").on('click',function(){
+      event.preventDefault();
+
+      $("#imageContainer").empty();
+
+
+      var charSelect=$("#pickCharacter").val().trim();
+
+      console.log("select char: ",charSelect);
+
+      $.getJSON( url, {
+    apikey: 'c145b9201ed1049e19d4af3e04800cd2',
+    ts: timestamp,
+    apikey: publicApi,
+    hash: hash,
+    name: charSelect,
+    limit:"10"
+
+  })
+    .done(function( response ) {
+        console.log("response1",response);
+        var stringResponse=JSON.stringify(response);
+        //console.log(stringResponse);
+        //$("#ajaxResponse").text(stringResponse);
+      var path=response.data.results[0].thumbnail.path;
+      var description=response.data.results[0].description;
+      if (description===""){
+          description="not available";
+
+      }  
+      console.log(description);
+
+      console.log(path);
+      var image=$("<img>");
+      image.attr("src",path+".jpg");
+      $("#imageContainer").append(image); 
+      $("#description").text(description);
+  }); 
+
+  
+
+
+  })
+
+
+
+// <!-- 
+// const Url = "http://gateway.marvel.com/v1/public/comics"
+//         var publicApi = 'c145b9201ed1049e19d4af3e04800cd2';
+//         var privateApi = '55ed8373f83689abfa159f0a80bacf9200e98a31'; -->
+
+// <!-- 
+// // joe function code....
+
+//         function getNewTimestamp() {
+//             var ts = new Date().getTime();
+//             var hash = MD5(ts + privateApi + publicApi);
+//             return [ts, hash];
+//         }
+
+//         function newRequest(url, callback) {
+//             const stuff = getNewTimestamp();
+//             const Params = {
+//                 "apikey": "c145b9201ed1049e19d4af3e04800cd2",
+//                 "ts": stuff[0],
+//                 "hash": stuff[1]
+//             }
+
+//             $.getJSON(url, Params)
+//             .done (callback);
+//         }
+
+//         newRequest("http://gateway.marvel.com/v1/public/characters?name=Captain+america", 
+//             function(results) {
+//                 let character = results.data.results;
+
+//                 character.forEach(char => {
+//                     newRequest(char.stories.collectionURI, res=>console.log(res))
+//                 })
+
+//             }
+//         ) -->
+
+// <!-- 
+// url2="http://gateway.marvel.com/v1/public/comics/42539";
+
+// $.getJSON( url2, {
+//     apikey: 'c145b9201ed1049e19d4af3e04800cd2',
+//     ts: timestamp,
+//     apikey: publicApi,
+//     hash: hash,
+    
+//   })
+//     .done(function( response2 ) {
+//         console.log("response 2 ",response2);
+//   });
+
+//    url3=`http://gateway.marvel.com/v1/public/characters/1009220/stories`;
+
+//   $.getJSON( url3, {
+//     apikey: 'c145b9201ed1049e19d4af3e04800cd2',
+//     ts: timestamp,
+//     apikey: publicApi,
+//     hash: hash,
+    
+//   })
+//     .done(function( response3 ) {
+//         console.log("response 3 ",response3);
+//   }); -->
+
+
+        
+        </script>
+</body>
+</html>
