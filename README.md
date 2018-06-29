@@ -36,18 +36,18 @@ optional - CAPTCHA
 var Characters = [
     'Thor',
     'Wolverine',
-    'Havok',
-    'Nightcraweler',
-    'Mystique',
+    'spider-man', 
+    'DareDevil',
+    'Storm',
     'Cable',
     'Deadpool',
     'Rogue',
-    'Jean grey', //Phoenix
+    'Jean grey', 
     'Iron Man',
     'Hulk',
     'Peter Quill',
-    'Rocket Raccoon', //add raccoon
-    'Magneto', //removes collector to Magneto
+    'Rocket Raccoon', 
+    'Magneto', 
     'Loki',
     'Red skull', // add space on it
     'Ronan',
