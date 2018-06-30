@@ -40,7 +40,7 @@ var Characters = [
     'DareDevil',
     'Storm',
     'Falcon',
-    'Deadpool',
+    'Deadpool',jj
     'Rogue',
     'Phoenix', 
     'Iron Man',
