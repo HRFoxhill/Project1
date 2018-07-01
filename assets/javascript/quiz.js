@@ -311,6 +311,29 @@ $(document).ready(function () {
 
         // todo: get movie/gif info
 
+
+        // Code for Ink form Data Validation
+       
+        
+        Ink.requireModules(['Ink.Util.Validator_1'], function(Validator) {
+
+            var result1 = Validator.email('inkdev@sapo.pt');
+            Ink.log(result1); // true
+          
+            var result2 = Validator.email('inkdev\u0040sapo.pt');
+            Ink.log(result2); // true - (\u0040 is at sign) 
+            
+            var result3 = Validator.email('sometextnomail');
+            Ink.log(result3); // false 
+        });
+
+        // gather data from the form
+
+        $( "#form" ).submit(function( event ) {
+            alert( "Handler for .submit() called." );
+            event.preventDefault();
+          });
+
     }); // end submit
 
 }); // end page load
