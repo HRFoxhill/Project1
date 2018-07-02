@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>API Marvel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Own CSS linked -->
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    
+    <!-- bootstrap library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- jquery library -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">    <h1>SuperHero API</h1>
+            <div id="character">
+              <p>Testing SuperHero APi</p>
+            </div>
+        </div> 
+
+    <div class="row">
+        <div class="col-md-6" id="dropDownContainer1">          
+        </div>
+      
+        <div class="col-md-6" id="dropDownContainer2">            
+        </div>
+    </div>     
+
+    <div class="row">
+            <div class="col-md-6" id="imageContainer1">          
+            </div>        
+            <div class="col-md-6" id="imageContainer2">            
+            </div>
+    </div>   
+
+    <div class="row">
+            <div class="col-md-6" id="description1">          
+            </div>       
+            <div class="col-md-6" id="description2">                
+            </div>
+    </div> 
+
+    <div class="row">
+            <div class="col-md-12">
+                <input type="submit" id="submit"> </div>
+                
+            </div>
+
+
+    <script>
+        var token='10160469589180514';
+        var urlSearch=`http://superheroapi.com/api/${token}/search/`;
+        var url=`http://superheroapi.com/api/${token}/`
+
+        var Characters = [ ['Thor',659,0],
+         ['Wolverine',717,0],
+          ['Black Panther',106,0],
+           ['DareDevil',201,0],
+            ['Storm',638,0],
+             ['Falcon',251,0],
+              ['Deadpool',213,0],
+              ['Rogue',567,0],
+               ['Phoenix',517,3],
+                ['Iron Man',346,0],
+                 ['Hulk',332,0],
+                  ['Groot',303,0],
+                   ['Rocket Raccoon',566,0],
+                    ['Magneto',423,0],
+                     ['Loki',414,0],
+                      ['Red Skull',550,0,],
+                       ['Star-Lord',630,0],
+                        ['Doctor Doom',222,0],
+                         ['Captain America',149,0],
+                          ['Vision',697,0],
+                           ['Doctor Strange',226,0]
+                            ]
+
+      
+
+$(document).ready(function(){
+        var select=$("<select>");
+        select.attr("id","charChoice1");
+        var options;
+            for (var index in Characters)
+            {            
+                options=$("<option>");
+                options.attr("id",index)
+                options.val(Characters[index][1]);
+                options.text(Characters[index][0]);
+                select.append(options);            
+             }
+             select.appendTo("#dropDownContainer1, #dropDownContainer2");
+
+        });  
+
+  $("#submit").on('click',function(){
+      event.preventDefault();
+
+      clear();
+      var dropSelect1=$("#dropDownContainer1>#charChoice1 option:selected").val();
+      var dropSelect2=$("#dropDownContainer2>#charChoice1 option:selected").val();
+      console.log("dropDown1 is ",dropSelect1);
+      console.log("dropDown2 is ",dropSelect2);
+
+      var char1Desc=$("#dropDownContainer1>#charChoice1 option:selected").text();
+      var char2Desc=$("#dropDownContainer2>#charChoice1 option:selected").text();
+
+      console.log(`char1 is ${char1Desc} char 2 is ${char2Desc}`);
+
+      console.log(url);
+
+   $.ajax({
+        url: url+dropSelect1,
+        method: "GET",  
+  })
+    .done(function( response ) {
+        console.log("response1",response);
+
+     var path=response.image.url;
+
+    var image=$("<img>");
+     image.attr("src",path);
+     image.attr("height","200px");
+     image.attr("width","150px");
+    $("#imageContainer1").append(image); 
+    $("#description1").prepend(`Id : ${response.id} </br>`);
+  
+  }); 
+
+
+   $.ajax({
+        url: url+dropSelect2,
+        method: "GET",  
+  })
+    .done(function( response ) {
+        console.log("response1",response);
+
+     var path=response.image.url;
+
+    var image=$("<img>");
+     image.attr("src",path);
+     image.attr("height","200px");
+     image.attr("width","150px");
+    $("#imageContainer2").append(image); 
+    $("#description2").prepend(`Id : ${response.id} </br>`);
+    
+  }); 
+
+// CAll  to ComicVine to get description of character
+var index1=0;
+var index2=0;
+if (char1Desc==="Phoenix" )
+{
+    index1=3;
+}
+if (char2Desc==="Phoenix" )
+{
+    index2=3;
+}
+
+
+  newURL=`http://www.comicvine.com/api/search/?format=json&api_key=f9be3c08fb84c5acd562bffdc4a02e8ee1092509&query=${char2Desc}&resources=character`;
+  $.ajax({
+        url: newURL,
+        method: "GET",  
+  })
+    .done(function( response ) {
+        console.log("response comicVine :",response);
+        
+        var description2=response.results[index2].deck;
+        $("#description2").append(`<p class="style1"> ${description2}</p>`);
+
+  })
+
+    newURL=`http://www.comicvine.com/api/search/?format=json&api_key=f9be3c08fb84c5acd562bffdc4a02e8ee1092509&query=${char1Desc}&resources=character`;
+    
+    $.ajax({
+        url: newURL,
+        method: "GET",  
+  })
+    .done(function( response ) {
+        console.log("response comicVine :",response);
+        
+        var description1=response.results[index1].deck;
+        $("#description1").append(`<p class="style1"> ${description1}</p>`);
+
+  }) 
+}) 
+
+
+function clear() {
+    $("#description1").empty();
+    $("#description2").empty();
+    $("#imageContainer1").empty();
+    $("#imageContainer2").empty();
+
+
+}
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
