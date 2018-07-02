@@ -36,6 +36,7 @@ optional - CAPTCHA
 var Characters = [
     'Thor',
     'Wolverine',
+<<<<<<< Updated upstream
     'Black Panther', 
     'DareDevil',
     'Storm',
@@ -46,6 +47,18 @@ var Characters = [
     'Iron Man',
     'Hulk',
     'Groot',
+=======
+    'spider-man', 
+    'DareDevil',
+    'Storm',
+    'Cable',
+    'Deadpool',
+    'Rogue',
+    'Jean grey', 
+    'Iron Man',
+    'Hulk',
+    'Peter Quill',
+>>>>>>> Stashed changes
     'Rocket Raccoon', 
     'Magneto', 
     'Loki',
