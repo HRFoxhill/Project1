@@ -23,7 +23,7 @@
 $(document).ready(function () {
 
     // question array (hold our question objects)
-    var questions =[ // todo: fill with real question and answer
+    var questions =[ // TODO: fill with real question and answer
 
         {
             question: "What is your favorite color",
@@ -247,53 +247,96 @@ $(document).ready(function () {
         },
     ]; // end questions array
 
-    // create form 
-    var qForm = $("<form>")
+    // create unordered list for all of the questions 
+    var qList = $("<ul>");
+    qList.addClass("control");
+    qList.addClass("unstyled");
 
     // loop through every questions
     for (var ind in questions) {
 
         // create div for each question
-        var qDiv = $("<div>");
-        qDiv.addClass("questionDiv");
+        var qLine = $("<li>");
 
-        // create question 
+        // // create question 
         var quest = $("<h3>");
-        quest.append(questions[ind].question);
+        quest.text(questions[ind].question);
 
-        // add question 
-        qDDiv.append(quest);
+        //console.log("Q"+ind+": "+questions[ind].question);
 
+        // // add question to the line
+        qLine.append(quest);
        
         // add answers
-        for(var j in questions[ind].answers){
+        for(var j in questions[ind].answer){
 
-            qDiv.append("<br>"); // add break
+
+            qLine.append("<br>"); // add break
 
              // create radio button
             var radButton = $("<input>")
             radButton.attr("type", "radio");
-            radButton.addclass("QName", ind); // add name
-            radButton.addclass("ansInd", j); // add an index for each answer
+            radButton.attr("id", ind+"-"+j); // creates an id with question and answer index
+            radButton.addClass("data-question-ind", ind); // add question index
+            radButton.addClass("data-answer-ind", j); // add answer index
 
-            // add the radio button to the question 
-            qDiv.append(radButton);
+            // add the radio button to the line 
+            qLine.append(radButton);
 
-            // add answer 
-            qDiv.append(questions[i].answers[j]);
-            qDiv.append("<br>"); // add break
+            // create label 
+            var qLabel = $("<label>");
+            qLabel.attr("for",ind+"-"+j);
+            qLabel.text(questions[ind].answer[j]);
 
+            //console.log("---"+questions[ind].answer[j]);
+
+            // add label to line
+            qLine.append(qLabel);
+
+            // add line to list
+            qList.append(qLine);
 
         }
 
-        // add completed question to the form
-        qForm.append(qDiv);
+       
+        
     }
 
+     // create div for "control group" 
+     var qControlGroup = $("<div>");
+     qControlGroup.addClass("control-group");
+
+     // create button
     var SubmitButton = $("<button>");
     SubmitButton.attr("id","submit-answers");
+    SubmitButton.text("Donzo!");
 
-    // TODO: add quiz to dom
+     // add question list and submit button to div
+     qControlGroup.append(qList);
+    qControlGroup.append(SubmitButton);
+     
+
+     // create legend
+     var qLegend = $("<legend>");
+     qLegend.text("What Marvel Character are you?");
+
+     // create fieldset
+    var qFieldset = $("<fieldset>");
+
+    // add legend and div to fieldset
+    qFieldset.append(qLegend);
+    qFieldset.append(qControlGroup);
+
+
+     // create form
+    var qForm = $("<form>");
+    qForm.addClass("ink-form");
+
+    // add fieldset to form
+    qForm.append(qFieldset);
+
+    // TODO: add form to dom
+    $("#quiz-questions").append(qForm);
 
 
     //when quiz is submitted
