@@ -17,6 +17,9 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+
+    <!-- reference to config.js containing APi and Token Keys -->
+    <script type='text/javascript' src='../config.js'></script>
     
    <!-- Chart.js reference -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
@@ -71,33 +74,40 @@
             <a class="col-md-6" href="#" id="alink1">more details</a>         
             <a class="col-md-6" href="#" id="alink2">more details</a>            
     </div> 
-
+    
+   
     <script>
-        var token='10160469589180514';
+
+        // Fetch APikey and token from config.js
+        var MY_API = config.APIKEY_CV;
+        var MY_TOKEN = config.TOKEN_SH;
+        
+        var token=MY_TOKEN;
+
         var urlSearch=`http://superheroapi.com/api/${token}/search/`;
         var url=`http://superheroapi.com/api/${token}/`
 
-        var Characters = [ ['Thor',659,0],
-         ['Wolverine',717,0],
-          ['Black Panther',106,0],
-           ['DareDevil',201,0],
-            ['Storm',638,0],
-             ['Falcon',251,0],
-              ['Deadpool',213,0],
-              ['Rogue',567,0],
-               ['Phoenix',517,3],
-                ['Iron Man',346,0],
-                 ['Hulk',332,0],
-                  ['Groot',303,0],
-                   ['Rocket Raccoon',566,0],
-                    ['Magneto',423,0],
-                     ['Loki',414,0],
-                      ['Red Skull',550,0,],
-                       ['Star-Lord',630,0],
-                        ['Doctor Doom',222,0],
-                         ['Captain America',149,0],
-                          ['Vision',697,0],
-                           ['Doctor Strange',226,0]
+        var Characters = [ ['Thor',659],
+         ['Wolverine',717],
+          ['Black Panther',106],
+           ['DareDevil',201],
+            ['Storm',638],
+             ['Falcon',251],
+              ['Deadpool',213],
+              ['Rogue',567],
+               ['Phoenix',517],
+                ['Iron Man',346],
+                 ['Hulk',332],
+                  ['Groot',303],
+                   ['Rocket Raccoon',566],
+                    ['Magneto',423],
+                     ['Loki',414],
+                      ['Red Skull',550,],
+                       ['Star-Lord',630],
+                        ['Doctor Doom',222],
+                         ['Captain America',149],
+                          ['Vision',697],
+                           ['Doctor Strange',226]
                             ];
 
 var dataset1=[];
@@ -105,6 +115,8 @@ var dataset2=[];
 
 var char1Desc="";
 var char2Desc="";
+
+
 
       
 
@@ -220,6 +232,7 @@ $(document).ready(function(){
 //===========================================================
 // CAll  to ComicVine API to get description of character
 //===========================================================
+    var apikey=MY_API;
 
     var index1=0;
     var index2=0;
@@ -231,9 +244,9 @@ $(document).ready(function(){
     {
         index2=3;
     }
-
-
-  newURL=`http://www.comicvine.com/api/search/?format=json&api_key=f9be3c08fb84c5acd562bffdc4a02e8ee1092509&query=${char2Desc}&resources=character`;
+  
+  newURL=`http://www.comicvine.com/api/search/?format=json&api_key=${MY_API}&query=${char2Desc}&resources=character`;
+  
   $.ajax({
         url: newURL,
         method: "GET",  
@@ -252,7 +265,7 @@ $(document).ready(function(){
 
   })
 
-    newURL=`http://www.comicvine.com/api/search/?format=json&api_key=f9be3c08fb84c5acd562bffdc4a02e8ee1092509&query=${char1Desc}&resources=character`;
+    newURL=`http://www.comicvine.com/api/search/?format=json&api_key=${MY_API}&query=${char1Desc}&resources=character`;
     
     $.ajax({
         url: newURL,
@@ -323,7 +336,7 @@ function printClick1() {
   var w = window.open();
   var html = $("#history1").html();
 
-  // how do I write the html to the new window with JQuery?
+
     $(w.document.body).html(html);
     w.document.title=`${char1Desc} details page`;;
 }
@@ -335,8 +348,7 @@ $(function() {
 function printClick2() {
   var w = window.open();
   var html = $("#history2").html();
- 
-  // how do I write the html to the new window with JQuery?
+
     $(w.document.body).html(html);
     w.document.title=`${char2Desc} details page`;
 }
@@ -344,8 +356,9 @@ function printClick2() {
 $(function() {
     $("a#alink2").click(printClick2);
 });
-
+        
         </script>
+       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
