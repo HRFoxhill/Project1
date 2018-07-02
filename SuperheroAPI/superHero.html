@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>API Marvel</title>
+    <title>API SuperHero</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Own CSS linked -->
@@ -17,6 +17,9 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+    
+   <!-- Chart.js reference -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
 <body>
@@ -28,19 +31,27 @@
         </div> 
 
     <div class="row">
-        <div class="col-md-6" id="dropDownContainer1">          
+        <div class="col-md-4" id="dropDownContainer1">          
         </div>
-      
-        <div class="col-md-6" id="dropDownContainer2">            
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="dropDownContainer2">            
         </div>
     </div>     
 
     <div class="row">
-            <div class="col-md-6" id="imageContainer1">          
-            </div>        
-            <div class="col-md-6" id="imageContainer2">            
+            <div class="col-md-4" id="imageContainer1">       
             </div>
+            <div class="col-md-4">
+                <canvas id="myChart" width="200" height="200"></canvas>
+           </div>
+            <div class="col-md-4" id="imageContainer2">            
+            </div> 
     </div>   
+    <div class="row">
+            <div class="col-md-12">
+                <input type="submit" id="submitButton" value="submit"> <input type="submit" id="compareButton" value="compare"> </div>
+                
+            </div>
 
     <div class="row">
             <div class="col-md-6" id="description1">          
@@ -50,11 +61,16 @@
     </div> 
 
     <div class="row">
-            <div class="col-md-12">
-                <input type="submit" id="submit"> </div>
-                
+            <div class="col-md-6" id="history1">          
+            </div>       
+            <div class="col-md-6" id="history2">                
             </div>
-
+    </div> 
+    
+    <div class="row">
+            <a class="col-md-6" href="#" id="alink1">more details</a>         
+            <a class="col-md-6" href="#" id="alink2">more details</a>            
+    </div> 
 
     <script>
         var token='10160469589180514';
@@ -82,11 +98,18 @@
                          ['Captain America',149,0],
                           ['Vision',697,0],
                            ['Doctor Strange',226,0]
-                            ]
+                            ];
+
+var dataset1=[];
+var dataset2=[];
+
+var char1Desc="";
+var char2Desc="";
 
       
 
 $(document).ready(function(){
+        clear();
         var select=$("<select>");
         select.attr("id","charChoice1");
         var options;
@@ -102,21 +125,25 @@ $(document).ready(function(){
 
         });  
 
-  $("#submit").on('click',function(){
+  $("#submitButton").on('click',function(){
       event.preventDefault();
 
-      clear();
+      clear();     
       var dropSelect1=$("#dropDownContainer1>#charChoice1 option:selected").val();
       var dropSelect2=$("#dropDownContainer2>#charChoice1 option:selected").val();
       console.log("dropDown1 is ",dropSelect1);
       console.log("dropDown2 is ",dropSelect2);
 
-      var char1Desc=$("#dropDownContainer1>#charChoice1 option:selected").text();
-      var char2Desc=$("#dropDownContainer2>#charChoice1 option:selected").text();
+      char1Desc=$("#dropDownContainer1>#charChoice1 option:selected").text();
+      char2Desc=$("#dropDownContainer2>#charChoice1 option:selected").text();
 
       console.log(`char1 is ${char1Desc} char 2 is ${char2Desc}`);
 
       console.log(url);
+
+//===========================================================
+// CAll  to SuperHero API to get name and details
+//===========================================================
 
    $.ajax({
         url: url+dropSelect1,
@@ -131,11 +158,32 @@ $(document).ready(function(){
      image.attr("src",path);
      image.attr("height","200px");
      image.attr("width","150px");
-    $("#imageContainer1").append(image); 
+          
+
+    var ulList1=$("<ul>");
+    ulList1.append(`<li>${response.biography['full-name']}</li><li>${response.appearance.gender}</li><li>${response.appearance.height}</li>
+                    <li>${response.appearance.weight}</li><li>${response.work.occupation}</li>`);
+
+
+    // var image2=$("<img>");
+    // image2.attr("src",'http://via.placeholder.com/150x150');
+   
+    $("#imageContainer1").append(image).append(ulList1);
     $("#description1").prepend(`Id : ${response.id} </br>`);
+
+    console.log("powerstats: ",response.powerstats);
+    //labels: ["Combat", "Durability","Intelligence", "Power","Speed","Strength"],
+    dataset1[0]=response.powerstats.combat;
+    dataset1[1]=response.powerstats.durability;
+    dataset1[2]=response.powerstats.intelligence;
+    dataset1[3]=response.powerstats.power;
+    dataset1[4]=response.powerstats.speed;
+    dataset1[5]=response.powerstats.strength;
+
+    console.log("dataset1",dataset1);
+
   
   }); 
-
 
    $.ajax({
         url: url+dropSelect2,
@@ -150,22 +198,39 @@ $(document).ready(function(){
      image.attr("src",path);
      image.attr("height","200px");
      image.attr("width","150px");
-    $("#imageContainer2").append(image); 
-    $("#description2").prepend(`Id : ${response.id} </br>`);
-    
+
+    var ulList2=$("<ul>");
+    ulList2.append(`<li>${response.biography['full-name']}</li><li>${response.appearance.gender}</li><li>${response.appearance.height}</li>
+                    <li>${response.appearance.weight}</li><li>${response.work.occupation}</li>`);
+
+    $("#imageContainer2").append(image).append(ulList2); 
+    $("#description2").prepend(`Id : ${response.id} </br>`); 
+
+    dataset2[0]=response.powerstats.combat;
+    dataset2[1]=response.powerstats.durability;
+    dataset2[2]=response.powerstats.intelligence;
+    dataset2[3]=response.powerstats.power;
+    dataset2[4]=response.powerstats.speed;
+    dataset2[5]=response.powerstats.strength;  
+
+    console.log("dataset2 :",dataset2) 
   }); 
 
-// CAll  to ComicVine to get description of character
-var index1=0;
-var index2=0;
-if (char1Desc==="Phoenix" )
-{
-    index1=3;
-}
-if (char2Desc==="Phoenix" )
-{
-    index2=3;
-}
+
+//===========================================================
+// CAll  to ComicVine API to get description of character
+//===========================================================
+
+    var index1=0;
+    var index2=0;
+    if (char1Desc==="Phoenix" )
+    {
+        index1=3;
+    }
+    if (char2Desc==="Phoenix" )
+    {
+        index2=3;
+    }
 
 
   newURL=`http://www.comicvine.com/api/search/?format=json&api_key=f9be3c08fb84c5acd562bffdc4a02e8ee1092509&query=${char2Desc}&resources=character`;
@@ -177,7 +242,13 @@ if (char2Desc==="Phoenix" )
         console.log("response comicVine :",response);
         
         var description2=response.results[index2].deck;
+        var history2=response.results[index2].description;
+
         $("#description2").append(`<p class="style1"> ${description2}</p>`);
+        $("#history2").append(`<p class="style1"> ${history2}</p>`);
+        $("#history2").hide();
+        $("#alink2").show();
+
 
   })
 
@@ -191,10 +262,49 @@ if (char2Desc==="Phoenix" )
         console.log("response comicVine :",response);
         
         var description1=response.results[index1].deck;
+        var history1=response.results[index1].description;
         $("#description1").append(`<p class="style1"> ${description1}</p>`);
+        $("#history1").append(`<p class="style1"> ${history1}</p>`);
+        $("#history1").hide();
+        $("#alink1").show();
 
+        
   }) 
 }) 
+
+ $("#compareButton").on('click',function(){
+      event.preventDefault();
+      $("#myChart").show();
+      var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'radar',
+
+    // The data for our dataset
+    data: {
+        labels: ["Combat", "Durability","Intelligence", "Power","Speed","Strength"],
+        datasets: [{
+            label: char1Desc,
+            backgroundColor: 'rgb(66,134,244,0.4)',
+            borderColor: '#5042f4',
+            borderWidth:3,
+            data: dataset1,
+        },
+        {        
+            label: char2Desc,
+            backgroundColor: 'rgb(255, 99, 132,0.4)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth:3,
+            data: dataset2,
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+})
+
+
 
 
 function clear() {
@@ -202,9 +312,38 @@ function clear() {
     $("#description2").empty();
     $("#imageContainer1").empty();
     $("#imageContainer2").empty();
-
-
+    $("#history1").empty();
+    $("#history2").empty();
+    $("#alink1").hide();
+    $("#alink2").hide();
+    $("#myChart").hide();
 }
+
+function printClick1() {
+  var w = window.open();
+  var html = $("#history1").html();
+
+  // how do I write the html to the new window with JQuery?
+    $(w.document.body).html(html);
+    w.document.title=`${char1Desc} details page`;;
+}
+
+$(function() {
+    $("a#alink1").click(printClick1);
+});
+
+function printClick2() {
+  var w = window.open();
+  var html = $("#history2").html();
+ 
+  // how do I write the html to the new window with JQuery?
+    $(w.document.body).html(html);
+    w.document.title=`${char2Desc} details page`;
+}
+
+$(function() {
+    $("a#alink2").click(printClick2);
+});
 
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
