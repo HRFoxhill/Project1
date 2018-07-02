@@ -22,6 +22,9 @@
 // when page loads
 $(document).ready(function () {
 
+    $("#quiz-results").hide();
+    $("#quiz-questions").show();
+
     // question array (hold our question objects)
     var questions =[ // TODO: fill with real question and answer
 
@@ -276,9 +279,9 @@ $(document).ready(function () {
              // create radio button
             var radButton = $("<input>")
             radButton.attr("type", "radio");
-            radButton.attr("id", ind+"-"+j); // creates an id with question and answer index
-            radButton.addClass("data-question-ind", ind); // add question index
-            radButton.addClass("data-answer-ind", j); // add answer index
+            radButton.attr("name", ind); // creates an id with question index
+            //radButton.attr("data-question-ind", ind); 
+            radButton.attr("data-answer", j); // add answer index
 
             // add the radio button to the line 
             qLine.append(radButton);
@@ -344,9 +347,41 @@ $(document).ready(function () {
 
         // makes it not send info
         event.preventDefault();
+
+        // TODO: add quiz form validation - no blank answers
+
+        // show the results page
+        $("#quiz-results").show();
+        $("#quiz-questions").hide();
+
+
         
         // initial score, The value of each index represents how much you are like that corresponding character
         var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        // Debug: show which answers where selected
+
+        // go through all of the questions
+        for(var i =0; i< questions.length; i++ ){
+            console.log( $("input:radio[name="+i+"]:checked").attr("data-answer") ); // log index of answer
+            
+            // get the answer for each questions, store as p tag
+            var currAns = questions[i].answer[$("input:radio[name="+i+"]:checked").attr("data-answer")];
+            var pTag = $("<p>");
+            pTag.text(currAns);
+
+            console.log(currAns); // log the answer
+
+            $("#quiz-results").append(pTag); // add answer to dom
+
+        }
+        
+
+        
+        // first - the value of the first question
+        //$("#quiz-questions").append(firstAns);
+
+        
 
         // todo: calculate score
 
@@ -355,9 +390,9 @@ $(document).ready(function () {
         // todo: get movie/gif info
 
 
-        // Code for Ink form Data Validation
-       
         
+       
+        // Ink form Data Validation
         Ink.requireModules(['Ink.Util.Validator_1'], function(Validator) {
 
             var result1 = Validator.email('inkdev@sapo.pt');
