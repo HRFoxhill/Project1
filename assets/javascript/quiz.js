@@ -1,3 +1,6 @@
+
+//Initialize Firebase
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
@@ -13,7 +16,6 @@ firebase.initializeApp(config);
 // Assign the reference to the database to a variable named 'database'
 // var database = ...
 var database = firebase.database()
-
 
 // when page loads
 $(document).ready(function () {
@@ -275,9 +277,7 @@ $(document).ready(function () {
             // create radio button
             var radButton = $("<input>")
             radButton.attr("type", "radio");
-            radButton.attr("data-rules", "required");
             radButton.attr("name", ind); // creates an id with question index
-            radButton.attr("value", j); // creates an id with question index
             //radButton.attr("data-question-ind", ind); 
             radButton.attr("data-answer", j); // add answer index
 
@@ -305,13 +305,11 @@ $(document).ready(function () {
 
     // create div for "control group" 
     var qControlGroup = $("<div>");
-    qControlGroup.addClass("control-group required");
-    qControlGroup.attr("data-rules", "atLeastOne");
+    qControlGroup.addClass("control-group");
 
     // create button
     var SubmitButton = $("<button>");
     SubmitButton.attr("id", "submit-answers");
-    SubmitButton.attr("value", "Submit");
     SubmitButton.text("Donzo!");
 
     // add question list and submit button to div
@@ -334,9 +332,6 @@ $(document).ready(function () {
     // create form
     var qForm = $("<form>");
     qForm.addClass("ink-form");
-    qForm.attr("id", "questionsform");
-    qForm.attr("method", "post");
-    qForm.attr("action", "#");
 
     // add fieldset to form
     qForm.append(qFieldset);
@@ -351,16 +346,7 @@ $(document).ready(function () {
         // makes it not send info
         event.preventDefault();
 
-        // TODO: add quiz form validation - no blank answers
-        Ink.requireModules(['Ink.UI.FormValidator_2', 'Ink.Dom.Selector_1'], function (FormValidator, Selector) {
-            alert(FormValidator + " \n "+Selector);
-
-            FormValidator.setRule('atLeastOne', 'Select at least one of the radio options', function (value) {
-                return !!Selector.select('input[type="radio"]:checked', this.getElement()).length;
-            });
-            var myValidator = new FormValidator("#questionsform");
-        });
-
+        // TODO: add quiz form validation - no blank answers!
 
         // show the results page
         $("#quiz-results").show();
@@ -370,7 +356,6 @@ $(document).ready(function () {
 
         // initial score, The value of each index represents how much you are like that corresponding character
         var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
 
         // Debug: show which answers where selected
 
@@ -473,88 +458,6 @@ $(document).ready(function () {
             var id2=getCharacterId(lessChar);
             console.log(id);
 
-        // Debug: show which answers where selected
-
-        // go through all of the questions
-        for (var i = 0; i < questions.length; i++) {
-            console.log($("input:radio[name=" + i + "]:checked").attr("data-answer")); // log index of answer
-
-            // get the answer for each questions, store as p tag
-            var currAns = questions[i].answer[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
-            var pTag = $("<p>");
-            pTag.text(currAns);
-
-                // add scores from the answer to the users score
-                for (var j in ansArrVals) {
-                    userScore[j] += ansArrVals[j];
-                }
-
-            }
-
-        }
-
-
-
-        // first - the value of the first question
-        //$("#quiz-questions").append(firstAns);
-
-
-
-        console.log("Highest Value: " + highestVal);
-        console.log("Highest Index: " + highestInd);
-
-        var marvelCharacters = ['Thor', 'Wolverine', 'Black Panther', 'DareDevil', 'Storm', 'Falcon', 'Deadpool', 'Rogue', 'Phoenix', 'Iron Man', 'Hulk', 'Groot', 'Rocket Raccoon', 'Magneto', 'Loki', 'Red Skull', // add space on it 
-        'Star-Lord', 'Doctor Doom', // correct to Doctor for API search purpose 
-        'Captain America', 'Vision', 'Doctor Strange']; // correct to Doctor for API search purpose ]
-
-        // THE HERO THE QUIZ FOUND THAT YOU ARE!!!!!
-        var userChar = marvelCharacters[highestInd];
-        console.log("Your Hero: " + userChar);
-
-        var HERO = $("<h1>");
-        HERO.text(userChar);
-
-
-
-        // Ink form Data Validation
-        Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
-
-            var result1 = Validator.email('inkdev@sapo.pt');
-            Ink.log(result1); // true
-
-            var result2 = Validator.email('inkdev\u0040sapo.pt');
-            Ink.log(result2); // true - (\u0040 is at sign) 
-
-            var result3 = Validator.email('sometextnomail');
-            Ink.log(result3); // false 
-        });
-        $("#quiz-results").append(HERO);
-
-
-
-
-
-            // todo: get marvel info
-
-            // todo: get movie/gif info
-
-
-
-
-            // Ink form Data Validation
-            Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
-
-                var result1 = Validator.email('inkdev@sapo.pt');
-                Ink.log(result1); // true
-
-                var result2 = Validator.email('inkdev\u0040sapo.pt');
-                Ink.log(result2); // true - (\u0040 is at sign) 
-
-                var result3 = Validator.email('sometextnomail');
-                Ink.log(result3); // false 
-            });
-
-
            //==========================================================
 
             var userCharData=superHeroApiRequest(id,"#container1","Your matched character");
@@ -566,11 +469,6 @@ $(document).ready(function () {
             comicVineApiRequest(lessChar,2);
 
             // todo: get movie/gif info
-
-        $("#form").submit(function (event) {
-            alert("Handler for .submit() called.");
-            event.preventDefault();
-        });
 
 
 
@@ -597,4 +495,4 @@ $(document).ready(function () {
 
     }); // end submit
 
- // end page load
+}); // end page load
