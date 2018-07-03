@@ -465,7 +465,6 @@ $(document).ready(function () {
         var HERO = $("<h1>");
         HERO.text(userChar);
 
-<<<<<<< HEAD
 
 
         // Ink form Data Validation
@@ -480,7 +479,6 @@ $(document).ready(function () {
             var result3 = Validator.email('sometextnomail');
             Ink.log(result3); // false 
         });
-=======
         $("#quiz-results").append(HERO);
 
 
@@ -506,7 +504,6 @@ $(document).ready(function () {
                 var result3 = Validator.email('sometextnomail');
                 Ink.log(result3); // false 
             });
->>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
 
         // gather data from the form
 
