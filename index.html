@@ -7,6 +7,15 @@
     <title>Who is your Marvel Champion?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
+    <!-- ink refs -->
+    <link rel="stylesheet" type="text/css" href=link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/"> <!-- inks css file -->
+    <!-- <script type="text/javascript" src="https://fastly.ink.sapo.pt/3.1.10/js/ink-all.js"></script> <! inks js bundle -->
+    <!-- <script type="text/javascript" src="https://fastly.ink.sapo.pt/3.1.10/js/autoload.js"></script> --> 
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+
     <!-- <link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/"> -->
     <link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/css/font-awesome.min.css">
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"  
@@ -17,7 +26,8 @@
     <script src="http://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 
        <!-- Chart.js reference -->
-   <script src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
 
@@ -80,20 +90,19 @@
     </div>
 
 <!-- quiz radio buttons -->
-
-    <!-- <form class="ink-form">
+<div id="quiz-questions">
+    <form class="ink-form" id="questionsForm" method="post" action="#">
             <fieldset>
-                <legend>Question</legend>
-                <div class="control-group">
-                    <p class="label">Please select one of these options</p>
-                    <ul class="control unstyled">
-                        <li><input type="radio"><label for="rb1">Ace of Spades</label></li>
+                <legend>What Marvel Character are you?</legend>
+                <div class="control-group required" data-rules="atLeastOne">
+                    <ul class="control unstyled" id="questionsList">
                     </ul>
                 </div>
-            </fieldset>
-        </form> -->
+            <input type="submit" id="submit-answers" value="Submit" class="ink-button success" />
+        </fieldset>
+    </form>
+</div>
 
-<div id="quiz-questions"></div>
 <div id="quiz-results">
     <h1>Here are your results</h1>
 
@@ -114,14 +123,19 @@
 
 
 
-<!-- Ink Framework Script Sources -->
-<link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/css/ink.css"> <!-- inks css file -->
-    <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js"></script> <!-- inks js bundle -->
-    <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/autoload.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10//css/ink.css"></script> 
+    <script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js"></script> 
+    <script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/autoload.js"></script>
     
+
+
+   
+  <script src="../Project1/assets/javascript/quiz.js"></script>
 
     <!-- Js -->
   <script src="assets/javascript/quiz.js"></script>
+
   <script type='text/javascript' src='./config.js'></script>
   <script src="assets/javascript/apiRequest.js"></script>
 </body>
