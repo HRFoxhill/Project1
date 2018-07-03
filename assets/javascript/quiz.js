@@ -17,6 +17,7 @@ firebase.initializeApp(config);
 // var database = ...
 var database = firebase.database()
 
+
 // when page loads
 $(document).ready(function () {
 
@@ -357,6 +358,7 @@ $(document).ready(function () {
         // initial score, The value of each index represents how much you are like that corresponding character
         var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+
         // Debug: show which answers where selected
 
         // go through all of the questions
@@ -458,6 +460,94 @@ $(document).ready(function () {
             var id2=getCharacterId(lessChar);
             console.log(id);
 
+        // Debug: show which answers where selected
+
+        // go through all of the questions
+        for (var i = 0; i < questions.length; i++) {
+            //console.log( $("input:radio[name="+i+"]:checked").attr("data-answer") ); // log index of answer
+
+            // debug: get the answer for each questions, store as p tag
+            // var currAns = questions[i].answer[$("input:radio[name="+i+"]:checked").attr("data-answer")];
+            // var pTag = $("<p>");
+            // pTag.text(currAns); 
+
+            // get the array for the corresponding answer's score
+            var ansArrVals = questions[i].anScore[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
+
+            // pTag.append(" | " );
+            // pTag.append(ansArrVals );
+
+            // console.log("Q" + i + ": " + currAns); // log the answer
+            // console.log("--- " + ansArrVals); // log the answer
+
+            // $("#quiz-results").append(pTag); // add answer to dom
+
+
+            // add array values to the user's score (if answer exists)
+            if (ansArrVals != null) {
+
+                // add scores from the answer to the users score
+                for (var j in ansArrVals) {
+                    userScore[j] += ansArrVals[j];
+                }
+
+            }
+
+        }
+
+        console.log("User Score: " + userScore);
+
+        // find highest value in 
+        var highestInd = -1;
+        var highestVal = Number.NEGATIVE_INFINITY;
+        for (var w in userScore) {
+            if (userScore[w] > highestVal) {
+                highestVal = userScore[w];
+                highestInd = w;
+            }
+        }
+
+        console.log("Highest Value: " + highestVal);
+        console.log("Highest Index: " + highestInd);
+
+        var marvelCharacters = ['Thor', 'Wolverine', 'Black Panther', 'DareDevil', 'Storm', 'Falcon', 'Deadpool', 'Rogue', 'Phoenix', 'Iron Man', 'Hulk', 'Groot', 'Rocket Raccoon', 'Magneto', 'Loki', 'Red Skull', // add space on it 
+        'Star-Lord', 'Doctor Doom', // correct to Doctor for API search purpose 
+        'Captain America', 'Vision', 'Doctor Strange']; // correct to Doctor for API search purpose ]
+
+        // THE HERO THE QUIZ FOUND THAT YOU ARE!!!!!
+        var userChar = marvelCharacters[highestInd];
+        console.log("Your Hero: " + userChar);
+
+        var HERO = $("<h1>");
+        HERO.text(userChar);
+
+        $("#quiz-results").append(HERO);
+
+
+
+
+
+            // todo: get marvel info
+
+            // todo: get movie/gif info
+
+
+
+
+            // Ink form Data Validation
+            Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
+
+                var result1 = Validator.email('inkdev@sapo.pt');
+                Ink.log(result1); // true
+
+                var result2 = Validator.email('inkdev\u0040sapo.pt');
+                Ink.log(result2); // true - (\u0040 is at sign) 
+
+                var result3 = Validator.email('sometextnomail');
+                Ink.log(result3); // false 
+            });
+
+
            //==========================================================
 
             var userCharData=superHeroApiRequest(id,"#container1","Your matched character");
@@ -469,6 +559,11 @@ $(document).ready(function () {
             comicVineApiRequest(lessChar,2);
 
             // todo: get movie/gif info
+
+        $("#form").submit(function (event) {
+            alert("Handler for .submit() called.");
+            event.preventDefault();
+        });
 
 
 
