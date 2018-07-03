@@ -1,6 +1,3 @@
-
-//Initialize Firebase
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
@@ -278,7 +275,9 @@ $(document).ready(function () {
             // create radio button
             var radButton = $("<input>")
             radButton.attr("type", "radio");
+            radButton.attr("data-rules", "required");
             radButton.attr("name", ind); // creates an id with question index
+            radButton.attr("value", j); // creates an id with question index
             //radButton.attr("data-question-ind", ind); 
             radButton.attr("data-answer", j); // add answer index
 
@@ -306,11 +305,13 @@ $(document).ready(function () {
 
     // create div for "control group" 
     var qControlGroup = $("<div>");
-    qControlGroup.addClass("control-group");
+    qControlGroup.addClass("control-group required");
+    qControlGroup.attr("data-rules", "atLeastOne");
 
     // create button
     var SubmitButton = $("<button>");
     SubmitButton.attr("id", "submit-answers");
+    SubmitButton.attr("value", "Submit");
     SubmitButton.text("Donzo!");
 
     // add question list and submit button to div
@@ -333,6 +334,9 @@ $(document).ready(function () {
     // create form
     var qForm = $("<form>");
     qForm.addClass("ink-form");
+    qForm.attr("id", "questionsform");
+    qForm.attr("method", "post");
+    qForm.attr("action", "#");
 
     // add fieldset to form
     qForm.append(qFieldset);
@@ -347,7 +351,16 @@ $(document).ready(function () {
         // makes it not send info
         event.preventDefault();
 
-        // TODO: add quiz form validation - no blank answers!
+        // TODO: add quiz form validation - no blank answers
+        Ink.requireModules(['Ink.UI.FormValidator_2', 'Ink.Dom.Selector_1'], function (FormValidator, Selector) {
+            alert(FormValidator + " \n "+Selector);
+
+            FormValidator.setRule('atLeastOne', 'Select at least one of the radio options', function (value) {
+                return !!Selector.select('input[type="radio"]:checked', this.getElement()).length;
+            });
+            var myValidator = new FormValidator("#questionsform");
+        });
+
 
         // show the results page
         $("#quiz-results").show();
@@ -464,27 +477,12 @@ $(document).ready(function () {
 
         // go through all of the questions
         for (var i = 0; i < questions.length; i++) {
-            //console.log( $("input:radio[name="+i+"]:checked").attr("data-answer") ); // log index of answer
+            console.log($("input:radio[name=" + i + "]:checked").attr("data-answer")); // log index of answer
 
-            // debug: get the answer for each questions, store as p tag
-            // var currAns = questions[i].answer[$("input:radio[name="+i+"]:checked").attr("data-answer")];
-            // var pTag = $("<p>");
-            // pTag.text(currAns); 
-
-            // get the array for the corresponding answer's score
-            var ansArrVals = questions[i].anScore[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
-
-            // pTag.append(" | " );
-            // pTag.append(ansArrVals );
-
-            // console.log("Q" + i + ": " + currAns); // log the answer
-            // console.log("--- " + ansArrVals); // log the answer
-
-            // $("#quiz-results").append(pTag); // add answer to dom
-
-
-            // add array values to the user's score (if answer exists)
-            if (ansArrVals != null) {
+            // get the answer for each questions, store as p tag
+            var currAns = questions[i].answer[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
+            var pTag = $("<p>");
+            pTag.text(currAns);
 
                 // add scores from the answer to the users score
                 for (var j in ansArrVals) {
@@ -495,17 +493,12 @@ $(document).ready(function () {
 
         }
 
-        console.log("User Score: " + userScore);
 
-        // find highest value in 
-        var highestInd = -1;
-        var highestVal = Number.NEGATIVE_INFINITY;
-        for (var w in userScore) {
-            if (userScore[w] > highestVal) {
-                highestVal = userScore[w];
-                highestInd = w;
-            }
-        }
+
+        // first - the value of the first question
+        //$("#quiz-questions").append(firstAns);
+
+
 
         console.log("Highest Value: " + highestVal);
         console.log("Highest Index: " + highestInd);
@@ -521,6 +514,20 @@ $(document).ready(function () {
         var HERO = $("<h1>");
         HERO.text(userChar);
 
+
+
+        // Ink form Data Validation
+        Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
+
+            var result1 = Validator.email('inkdev@sapo.pt');
+            Ink.log(result1); // true
+
+            var result2 = Validator.email('inkdev\u0040sapo.pt');
+            Ink.log(result2); // true - (\u0040 is at sign) 
+
+            var result3 = Validator.email('sometextnomail');
+            Ink.log(result3); // false 
+        });
         $("#quiz-results").append(HERO);
 
 
@@ -590,4 +597,4 @@ $(document).ready(function () {
 
     }); // end submit
 
-}); // end page load
+ // end page load
