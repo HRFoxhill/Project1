@@ -133,7 +133,7 @@ $(document).ready(function () {
             answer: ["Iowa", "Space", "Underground", "Ocean"],
             anScore: [
                 [2, 5, 7, 4, 6, 0, 9, -2, -6, -5, 2, 10, -6, 2, 1, -9, 6, 2, 7, 6, -2],
-                [-5, 8, 2, -2, 1, 9, 9, -5, 8, -5, -7, 0, 1, 0, 10, -2, -5, 5, -10, -10, 8]
+                [-5, 8, 2, -2, 1, 9, 9, -5, 8, -5, -7, 0, 1, 0, 10, -2, -5, 5, -10, -10, 8],
                 [-5, 5, 7, 4, 6, 0, 9, -5, 8, -5, -7, 0, 1, 0, 10, 8, -5, 4, -10, -10, 2],
                 [-6, -9, -8, -7, 6, -4, 3, -2, 6, -10, 3, 8, 2, -4, 9, -8, 1, -2, 8, 2],
             ]
@@ -309,13 +309,20 @@ $(document).ready(function () {
 
     // create div for "control group" 
     var qControlGroup = $("<div>");
+<<<<<<< HEAD
     qControlGroup.addClass("control-group required");
     qControlGroup.attr("data-rules", "atLeastOne");
+=======
+    qControlGroup.addClass("control-group");
+>>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
 
     // create button
     var SubmitButton = $("<button>");
     SubmitButton.attr("id", "submit-answers");
+<<<<<<< HEAD
     SubmitButton.attr("value", "Submit");
+=======
+>>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
     SubmitButton.text("Donzo!");
 
     // add question list and submit button to div
@@ -355,6 +362,7 @@ $(document).ready(function () {
         // makes it not send info
         event.preventDefault();
 
+<<<<<<< HEAD
         // TODO: add quiz form validation - no blank answers
         Ink.requireModules(['Ink.UI.FormValidator_2', 'Ink.Dom.Selector_1'], function (FormValidator, Selector) {
             alert(FormValidator + " \n "+Selector);
@@ -365,6 +373,9 @@ $(document).ready(function () {
             var myValidator = new FormValidator("#questionsform");
         });
 
+=======
+        // TODO: add quiz form validation - no blank answers!
+>>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
 
         // show the results page
         $("#quiz-results").show();
@@ -373,39 +384,88 @@ $(document).ready(function () {
 
 
         // initial score, The value of each index represents how much you are like that corresponding character
-        var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         // Debug: show which answers where selected
 
         // go through all of the questions
         for (var i = 0; i < questions.length; i++) {
+<<<<<<< HEAD
             console.log($("input:radio[name=" + i + "]:checked").attr("data-answer")); // log index of answer
 
             // get the answer for each questions, store as p tag
             var currAns = questions[i].answer[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
             var pTag = $("<p>");
             pTag.text(currAns);
+=======
+            //console.log( $("input:radio[name="+i+"]:checked").attr("data-answer") ); // log index of answer
 
-            console.log(currAns); // log the answer
+            // debug: get the answer for each questions, store as p tag
+            // var currAns = questions[i].answer[$("input:radio[name="+i+"]:checked").attr("data-answer")];
+            // var pTag = $("<p>");
+            // pTag.text(currAns); 
 
-            $("#quiz-results").append(pTag); // add answer to dom
+            // get the array for the corresponding answer's score
+            var ansArrVals = questions[i].anScore[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
+
+            // pTag.append(" | " );
+            // pTag.append(ansArrVals );
+
+            // console.log("Q" + i + ": " + currAns); // log the answer
+            // console.log("--- " + ansArrVals); // log the answer
+
+            // $("#quiz-results").append(pTag); // add answer to dom
+
+
+            // add array values to the user's score (if answer exists)
+            if (ansArrVals != null) {
+>>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
+
+                // add scores from the answer to the users score
+                for (var j in ansArrVals) {
+                    userScore[j] += ansArrVals[j];
+                }
+
+            }
 
         }
 
+<<<<<<< HEAD
 
 
         // first - the value of the first question
         //$("#quiz-questions").append(firstAns);
 
 
+=======
+        console.log("User Score: " + userScore);
 
-        // todo: calculate score
+        // find highest value in 
+        var highestInd = -1;
+        var highestVal = Number.NEGATIVE_INFINITY;
+        for (var w in userScore) {
+            if (userScore[w] > highestVal) {
+                highestVal = userScore[w];
+                highestInd = w;
+            }
+        }
+>>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
 
-        // todo: get marvel info
+        console.log("Highest Value: " + highestVal);
+        console.log("Highest Index: " + highestInd);
 
-        // todo: get movie/gif info
+        var marvelCharacters = ['Thor', 'Wolverine', 'Black Panther', 'DareDevil', 'Storm', 'Falcon', 'Deadpool', 'Rogue', 'Phoenix', 'Iron Man', 'Hulk', 'Groot', 'Rocket Raccoon', 'Magneto', 'Loki', 'Red Skull', // add space on it 
+        'Star-Lord', 'Doctor Doom', // correct to Doctor for API search purpose 
+        'Captain America', 'Vision', 'Doctor Strange']; // correct to Doctor for API search purpose ]
 
+        // THE HERO THE QUIZ FOUND THAT YOU ARE!!!!!
+        var userChar = marvelCharacters[highestInd];
+        console.log("Your Hero: " + userChar);
 
+        var HERO = $("<h1>");
+        HERO.text(userChar);
+
+<<<<<<< HEAD
 
 
         // Ink form Data Validation
@@ -420,6 +480,33 @@ $(document).ready(function () {
             var result3 = Validator.email('sometextnomail');
             Ink.log(result3); // false 
         });
+=======
+        $("#quiz-results").append(HERO);
+
+
+
+
+
+            // todo: get marvel info
+
+            // todo: get movie/gif info
+
+
+
+
+            // Ink form Data Validation
+            Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
+
+                var result1 = Validator.email('inkdev@sapo.pt');
+                Ink.log(result1); // true
+
+                var result2 = Validator.email('inkdev\u0040sapo.pt');
+                Ink.log(result2); // true - (\u0040 is at sign) 
+
+                var result3 = Validator.email('sometextnomail');
+                Ink.log(result3); // false 
+            });
+>>>>>>> 79aa5725b87ca776f51d331f07a362ac2915d856
 
         // gather data from the form
 
