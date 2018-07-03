@@ -18,7 +18,6 @@ firebase.initializeApp(config);
 var database = firebase.database()
 
 
-
 // when page loads
 $(document).ready(function () {
 
@@ -28,7 +27,7 @@ $(document).ready(function () {
     // question array (hold our question objects)
     var questions = [ // TODO: fill with real question and answer
 
-        {
+        {   //Q.1
             question: "What is your favorite color",
             answer: ["Black", "Red", "Blue", "Green"],
             anScore: [
@@ -40,7 +39,7 @@ $(document).ready(function () {
         },
 
 
-        {
+        {   //Q.2
             question: "If you were a tree, what tree would you be?",
             answer: ["Ash", "Holly", "Oak", "Maple"],
             anScore: [
@@ -51,7 +50,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.3
             question: "What is your favorite weapon",
             answer: ["Hammer", "Energy beams", "Gun", "Bare Hands"],
             anScore: [
@@ -62,7 +61,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.4
             question: "How do you like to travel?",
             answer: ["Surfboard", "Rollerblades", "None (Teleport)", "Fly"],
             anScore: [
@@ -73,7 +72,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.5
             question: "What would you do if you caught someone stealing",
             answer: ["Cut off their hand", "Tackle them", "Tell them \"Don't\"", "Ignore it"],
             anScore: [
@@ -84,7 +83,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.6
             question: "What is your defining personality trait?",
             answer: ["Anger", "Fear", "Justice", "Love"],
             anScore: [
@@ -95,7 +94,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.7
             question: "How do you like to work",
             answer: ["Alone", "As a leader", "As an underdog", "With my best friend"],
             anScore: [
@@ -106,7 +105,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.8
             question: "Which superpower is the coolest?",
             answer: ["Brilliant mind", "Raw strength", "Magic", "Trick shots"],
             anScore: [
@@ -117,7 +116,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.9
             question: "What is your spirit animal?",
             answer: ["Cheetah", "Elephant", "Dolphin", "Griffin"],
             anScore: [
@@ -128,7 +127,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.10
             question: "Where would you live?",
             answer: ["Iowa", "Space", "Underground", "Ocean"],
             anScore: [
@@ -139,7 +138,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.11
             question: "Where would you vacation?",
             answer: ["Baghdad", "Neptune", "Paris", "Artic"],
             anScore: [
@@ -150,7 +149,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.12
             question: "What weapon do you use to attack a bug?",
             answer: ["Hammer", "Bare Hands", "Spear", "Laser"],
             anScore: [
@@ -161,7 +160,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.13
             question: "What are you afraid of?",
             answer: ["Spiders", "Cuccumbers", "Bears", "Ghosts"],
             anScore: [
@@ -172,7 +171,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.14
             question: "What hairstyle do you rock?",
             answer: ["Bald", "Mullet", "Military cut", "Ponytail"],
             anScore: [
@@ -183,7 +182,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.15
             question: "What is your relationship with your parents?",
             answer: ["I killed them", "See them every holiday", "I never knew them", "They're ok"],
             anScore: [
@@ -194,7 +193,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.16
             question: "Who is your sidekick?",
             answer: ["Jubilee", "Foggy Nelson", "War machine", "Bucky"],
             anScore: [
@@ -205,7 +204,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.17
             question: "What do you do in your freetime?",
             answer: ["Read", "Hunt bad guys", "Try take over the world", "Plot revenge"],
             anScore: [
@@ -216,7 +215,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.18
             question: "How many licks does it take to get the center of a lollipop?",
             answer: ["364 licks", "I eat it", "I don't eat food", "3"],
             anScore: [
@@ -227,7 +226,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.19
             question: "What hogwarts house do you belog to?",
             answer: ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"],
             anScore: [
@@ -238,7 +237,7 @@ $(document).ready(function () {
             ]
         },
 
-        {
+        {   //Q.20
             question: "What time do you wake up in the morning?",
             answer: ["At night", "5:00 AM", "Noon o'clock", "10:00 AM"],
             anScore: [
@@ -359,6 +358,108 @@ $(document).ready(function () {
         // initial score, The value of each index represents how much you are like that corresponding character
         var userScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+
+        // Debug: show which answers where selected
+
+        // go through all of the questions
+        for (var i = 0; i < questions.length; i++) {
+            //console.log( $("input:radio[name="+i+"]:checked").attr("data-answer") ); // log index of answer
+
+            // debug: get the answer for each questions, store as p tag
+            // var currAns = questions[i].answer[$("input:radio[name="+i+"]:checked").attr("data-answer")];
+            // var pTag = $("<p>");
+            // pTag.text(currAns); 
+
+            // get the array for the corresponding answer's score
+            var ansArrVals = questions[i].anScore[$("input:radio[name=" + i + "]:checked").attr("data-answer")];
+
+            // pTag.append(" | " );
+            // pTag.append(ansArrVals );
+
+            // console.log("Q" + i + ": " + currAns); // log the answer
+            // console.log("--- " + ansArrVals); // log the answer
+
+            // $("#quiz-results").append(pTag); // add answer to dom
+
+
+            // add array values to the user's score (if answer exists)
+            if (ansArrVals != null) {
+
+                // add scores from the answer to the users score
+                for (var j in ansArrVals) {
+                    userScore[j] += ansArrVals[j];
+                }
+
+            }
+
+        }
+
+        console.log("User Score: " + userScore);
+
+        // find highest value in 
+        var highestInd = -1;
+        var highestVal = Number.NEGATIVE_INFINITY;
+        for (var w in userScore) {
+            if (userScore[w] > highestVal) {
+                highestVal = userScore[w];
+                highestInd = w;
+            }
+        }
+        //================================== ADD EDISON
+        var lowestVal= Math.min.apply(null,userScore);
+        console.log("Lowest score is ",lowestVal);
+        console.log("Lowest index is",userScore.indexOf(lowestVal));
+        
+        //================================== END
+        console.log("Highest Value: " + highestVal);
+        console.log("Highest Index: " + highestInd);
+
+        var marvelCharacters = ['Thor', 'Wolverine', 'Black Panther', 'DareDevil', 'Storm', 'Falcon', 'Deadpool', 'Rogue', 'Phoenix', 'Iron Man', 'Hulk', 'Groot', 'Rocket Raccoon', 'Magneto', 'Loki', 'Red Skull', // add space on it 
+        'Star-Lord', 'Doctor Doom', // correct to Doctor for API search purpose 
+        'Captain America', 'Vision', 'Doctor Strange']; // correct to Doctor for API search purpose ]
+
+        // THE HERO THE QUIZ FOUND THAT YOU ARE!!!!!
+        var userChar = marvelCharacters[highestInd];
+        var lessChar =  marvelCharacters[userScore.indexOf(lowestVal)]
+        console.log("Your Hero: " + userChar);
+        console.log("Your opposite: " + lessChar);
+
+
+        // Testing purpose 
+        //========================
+        // var userChar = "Groot";
+        // var lessChar = "DareDevil";
+       
+
+
+        // var HERO = $("<h1>");
+        // HERO.text("Your matched character : "+userChar+" || "+"  Your least character : "+lessChar);
+
+        // $("#quiz-results").append(HERO);
+
+        // ============ CREATE PAGE JQUERY =====================
+
+        $("#quiz-results").html(`<div class="ink-grid">
+                                    <div class="column-group">
+                                        <div class="all-35" id="container1"></div>
+                                        <div class="all-30"><canvas class="canvasStyle" id="myChart" width="200" height="200"></canvas></div>
+                                        <div class="all-35" id="container2"></div>
+                                    </div>
+                                    <div class="column-group">
+                                        <div class="all-50" id="description1"></div>
+                                        <div class="all-50" id="description2"></div>
+                                    </div>
+                                    <div class="column-group">
+                                        <div class="all-50" id="details1"></div>
+                                        <div class="all-50" id="details2"></div>
+                                </div>
+                                </div>`);
+        
+            // todo: get marvel info            
+            var id=getCharacterId(userChar);
+            var id2=getCharacterId(lessChar);
+            console.log(id);
+
         // Debug: show which answers where selected
 
         // go through all of the questions
@@ -446,6 +547,40 @@ $(document).ready(function () {
                 Ink.log(result3); // false 
             });
 
+
+           //==========================================================
+
+            var userCharData=superHeroApiRequest(id,"#container1","Your matched character");
+            console.log("helllooooo ",userCharData);
+            superHeroApiRequest(id2,"#container2","Your least character");
+           
+
+            comicVineApiRequest(userChar,1);
+            comicVineApiRequest(lessChar,2);
+
+            // todo: get movie/gif info
+
+        $("#form").submit(function (event) {
+            alert("Handler for .submit() called.");
+            event.preventDefault();
+        });
+
+
+
+
+            // Ink form Data Validation
+            Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
+
+                var result1 = Validator.email('inkdev@sapo.pt');
+                Ink.log(result1); // true
+
+                var result2 = Validator.email('inkdev\u0040sapo.pt');
+                Ink.log(result2); // true - (\u0040 is at sign) 
+
+                var result3 = Validator.email('sometextnomail');
+                Ink.log(result3); // false 
+            });
+
         // gather data from the form
 
         $("#form").submit(function (event) {
@@ -456,7 +591,3 @@ $(document).ready(function () {
     }); // end submit
 
 }); // end page load
-
-
-
-

@@ -1,0 +1,11 @@
+   <link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/css/font-awesome.min.css"> to HTML page
+
+function
+
+Math.min.apply(null,array)
+
+-52
+
+array.indexOf(-52)
+
+15
