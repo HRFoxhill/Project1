@@ -1,6 +1,4 @@
 
-//Initialize Firebase
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
@@ -249,9 +247,9 @@ $(document).ready(function () {
     ]; // end questions array
 
     // create unordered list for all of the questions 
-    var qList = $("<ul>");
-    qList.addClass("control");
-    qList.addClass("unstyled");
+    var qList = $("#questionsList");
+    // qList.addClass("control");
+    // qList.addClass("unstyled");
 
     // loop through every questions
     for (var ind in questions) {
@@ -276,7 +274,10 @@ $(document).ready(function () {
 
             // create radio button
             var radButton = $("<input>")
+            radButton.addClass("required");
             radButton.attr("type", "radio");
+            radButton.attr("value", j);
+            radButton.attr("id", "myInput");
             radButton.attr("name", ind); // creates an id with question index
             //radButton.attr("data-question-ind", ind); 
             radButton.attr("data-answer", j); // add answer index
@@ -286,8 +287,11 @@ $(document).ready(function () {
 
             // create label 
             var qLabel = $("<label>");
-            qLabel.attr("for", ind + "-" + j);
+            var label = ("for", ind + "-" + j);
+            qLabel.attr(label);
             qLabel.text(questions[ind].answer[j]);
+
+
 
             //console.log("---"+questions[ind].answer[j]);
 
@@ -299,45 +303,7 @@ $(document).ready(function () {
 
         }
 
-
-
     }
-
-    // create div for "control group" 
-    var qControlGroup = $("<div>");
-    qControlGroup.addClass("control-group");
-
-    // create button
-    var SubmitButton = $("<button>");
-    SubmitButton.attr("id", "submit-answers");
-    SubmitButton.text("Donzo!");
-
-    // add question list and submit button to div
-    qControlGroup.append(qList);
-    qControlGroup.append(SubmitButton);
-
-
-    // create legend
-    var qLegend = $("<legend>");
-    qLegend.text("What Marvel Character are you?");
-
-    // create fieldset
-    var qFieldset = $("<fieldset>");
-
-    // add legend and div to fieldset
-    qFieldset.append(qLegend);
-    qFieldset.append(qControlGroup);
-
-
-    // create form
-    var qForm = $("<form>");
-    qForm.addClass("ink-form");
-
-    // add fieldset to form
-    qForm.append(qFieldset);
-
-    // TODO: add form to dom
-    $("#quiz-questions").append(qForm);
 
 
     //when quiz is submitted
@@ -346,12 +312,30 @@ $(document).ready(function () {
         // makes it not send info
         event.preventDefault();
 
-        // TODO: add quiz form validation - no blank answers!
+        //  form validation - no blank answers!
+
+        // run validation
+        let curValidation = true;
+        for (let q = 0; q <= 19; q++) {
+            let questionid = "" + q;
+
+            let theValue = $("input:radio[name='" + questionid + "']:checked").val();
+            if (!theValue){
+                console.log("VALIDATION FAILED!");
+                curValidation = false;
+            }
+               
+
+            else console.log("Question" + questionid + "is" + theValue)
+        }
+
+
+        if(curValidation){
+
 
         // show the results page
         $("#quiz-results").show();
         $("#quiz-questions").hide();
-
 
 
         // initial score, The value of each index represents how much you are like that corresponding character
@@ -404,21 +388,21 @@ $(document).ready(function () {
             }
         }
         //================================== ADD EDISON
-        var lowestVal= Math.min.apply(null,userScore);
-        console.log("Lowest score is ",lowestVal);
-        console.log("Lowest index is",userScore.indexOf(lowestVal));
-        
+        var lowestVal = Math.min.apply(null, userScore);
+        console.log("Lowest score is ", lowestVal);
+        console.log("Lowest index is", userScore.indexOf(lowestVal));
+
         //================================== END
         console.log("Highest Value: " + highestVal);
         console.log("Highest Index: " + highestInd);
 
         var marvelCharacters = ['Thor', 'Wolverine', 'Black Panther', 'DareDevil', 'Storm', 'Falcon', 'Deadpool', 'Rogue', 'Phoenix', 'Iron Man', 'Hulk', 'Groot', 'Rocket Raccoon', 'Magneto', 'Loki', 'Red Skull', // add space on it 
-        'Star-Lord', 'Doctor Doom', // correct to Doctor for API search purpose 
-        'Captain America', 'Vision', 'Doctor Strange']; // correct to Doctor for API search purpose ]
+            'Star-Lord', 'Doctor Doom', // correct to Doctor for API search purpose 
+            'Captain America', 'Vision', 'Doctor Strange']; // correct to Doctor for API search purpose ]
 
         // THE HERO THE QUIZ FOUND THAT YOU ARE!!!!!
         var userChar = marvelCharacters[highestInd];
-        var lessChar =  marvelCharacters[userScore.indexOf(lowestVal)]
+        var lessChar = marvelCharacters[userScore.indexOf(lowestVal)]
         console.log("Your Hero: " + userChar);
         console.log("Your opposite: " + lessChar);
 
@@ -427,7 +411,7 @@ $(document).ready(function () {
         //========================
         // var userChar = "Groot";
         // var lessChar = "DareDevil";
-       
+
 
 
         // var HERO = $("<h1>");
@@ -452,46 +436,61 @@ $(document).ready(function () {
                                         <div class="all-50" id="details2"></div>
                                 </div>
                                 </div>`);
-        
-            // todo: get marvel info            
-            var id=getCharacterId(userChar);
-            var id2=getCharacterId(lessChar);
-            console.log(id);
 
-           //==========================================================
+        // todo: get marvel info            
+        var id = getCharacterId(userChar);
+        var id2 = getCharacterId(lessChar);
+        console.log(id);
 
-            var userCharData=superHeroApiRequest(id,"#container1","Your matched character");
-            console.log("helllooooo ",userCharData);
-            superHeroApiRequest(id2,"#container2","Your least character");
-           
+        //==========================================================
 
-            comicVineApiRequest(userChar,1);
-            comicVineApiRequest(lessChar,2);
-
-            // todo: get movie/gif info
+        var userCharData = superHeroApiRequest(id, "#container1", "Your matched character");
+        console.log("helllooooo ", userCharData);
+        superHeroApiRequest(id2, "#container2", "Your least character");
 
 
+        comicVineApiRequest(userChar, 1);
+        comicVineApiRequest(lessChar, 2);
+
+        // todo: get movie/gif info
 
 
-            // Ink form Data Validation
-            Ink.requireModules(['Ink.Util.Validator_1'], function (Validator) {
 
-                var result1 = Validator.email('inkdev@sapo.pt');
-                Ink.log(result1); // true
 
-                var result2 = Validator.email('inkdev\u0040sapo.pt');
-                Ink.log(result2); // true - (\u0040 is at sign) 
+        // Ink UI form Data Validation
+        Ink.requireModules(['Ink.Util.Validator_1', 'Ink.Dom.Event_1'], function (FormValidator, InkEvent) {
 
-                var result3 = Validator.email('sometextnomail');
-                Ink.log(result3); // false 
-            });
+            var result1 = FormValidator.email('inkdev@sapo.pt');
+            Ink.log(result1); // true
 
-        // gather data from the form
+            var result2 = FormValidator.email('inkdev\u0040sapo.pt');
+            Ink.log(result2); // true - (\u0040 is at sign) 
+
+            var result3 = FormValidator.email('sometextnomail');
+            Ink.log(result3); // false 
+
+
+            // var myForm = Ink.i('questionsForm');
+            // var myInput= Ink.i('myInput');
+
+            // InkEvent.on(myInput, 'keyup', function(event) {
+            //     var isValid = FormValidator.validate(myForm);
+        });
+
+
+        // gather data from the user form
 
         $("#form").submit(function (event) {
             alert("Handler for .submit() called.");
             event.preventDefault();
         });
+
+    }
+    else{
+        // error: user didn't enter all questions
+        alert("Missing Answer");
+        // TODO add modal with error
+    }
 
     }); // end submit
 
