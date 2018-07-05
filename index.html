@@ -56,6 +56,14 @@
         <span class="caption">I am a progress bar</span>
         <div class="bar grey"></div>
     </div>
+    <img src="assets/images/Marvel-Heroes-Best.jpg">
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        </style>
 
     <!-- modal divs -->
     <div class="ink-shade fade">
@@ -90,10 +98,11 @@
     </div>
 
 <!-- quiz radio buttons -->
-<div id="quiz-questions">
+<div class="ink-grid">
+    <div id="quiz-questions">
     <form class="ink-form" id="questionsForm" method="post" action="#">
             <fieldset>
-                <legend>What Marvel Character are you?</legend>
+                <!-- <legend>What Marvel Character are you?</legend> -->
                 <div class="control-group required" data-rules="atLeastOne">
                     <ul class="control unstyled" id="questionsList">
                     </ul>
@@ -101,8 +110,10 @@
             <input type="submit" id="submit-answers" value="Submit" class="ink-button success" />
         </fieldset>
     </form>
+    </div>
 </div>
 
+<div class="wrap">
 <div id="quiz-results">
     <h1>Here are your results</h1>
 
@@ -120,7 +131,7 @@
         <div class="all-50" id="description2"></div>
     </div>
 </div>
-
+</div>
 
 
 
