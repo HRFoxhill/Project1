@@ -9,7 +9,7 @@ var character="";
 var i=0;
 
 // global variables
-URL_SH= `https://superheroapi.com/api/${token}/`
+URL_SH= `http://superheroapi.com/api/${token}/`
 URL_CV=`https://static.comicvine.com/api/search/?format=json&api_key=${MY_API}&resources=character&query=`
 
 var CHARACTERS = [ ['Thor',659],
