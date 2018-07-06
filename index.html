@@ -8,17 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 
-    <!-- ink refs -->
-    <link rel="stylesheet" type="text/css" href=link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/"> <!-- inks css file -->
+    <!-- ink references -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/">
     <script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js"></script> 
     <script type="text/javascript" src="https://ink.global.ssl.fastly.net/js/autoload.js"></script> 
+    <link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/css/font-awesome.min.css"> -->
 
+    <!-- jQuery references -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10/css/font-awesome.min.css">
-    
     <!-- jQuery link -->
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -30,6 +29,7 @@
     <!-- <script src="http://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script> -->
 
        <!-- Chart.js reference -->
+
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
@@ -101,7 +101,7 @@
         </div>
     </div>
 
-
+<!-- User message modal for quiz submission -->
     <div class="ink-shade fade">
         <div id="errorModal" class="ink-modal fade" data-trigger="#submit-answers" data-width="80%" data-height="30%" role="dialog"
             aria-hidden="true" aria-labelled-by="modal-title">
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-<!-- quiz radio buttons -->
+<!-- quiz ink form  -->
 <div class="ink-grid">
     <div id="quiz-questions">
     <form class="ink-form" id="questionsForm" method="post" action="#">
@@ -125,7 +125,7 @@
                     <ul class="control unstyled" id="questionsList">
                     </ul>
                 </div>
-            <input type="submit" id="submit-answers" value="Submit Modal" class="ink-button success" />
+            <input type="submit" id="submit-answers" value="Submit" class="ink-button success" />
 
         </fieldset>
     </form>
@@ -133,30 +133,29 @@
 </div>
 
 <div class="wrap">
-<div id="quiz-results">
-    <h1>Here are your results</h1>
+    <div id="quiz-results">
+        <h1>Here are your results</h1>
 
-    <div id="imageContainer"></div>
-</div>
-
-<div class="ink-grid">
-    <div class="column-group">
-        <div class="all-35"></div>
-        <div class="all-30"><canvas id="myChart" width="200" height="200"></canvas></div>
-        <div class="all-35"></div>
+        <div id="imageContainer"></div>
     </div>
-    <div class="column-group">
-        <div class="all-50" id="description1"></div>
-        <div class="all-50" id="description2"></div>
+
+    <div class="ink-grid">
+        <div class="column-group">
+            <div class="all-35"></div>
+            <div class="all-30"><canvas id="myChart" width="200" height="200"></canvas></div>
+            <div class="all-35"></div>
+        </div>
+        <div class="column-group">
+            <div class="all-50" id="description1"></div>
+            <div class="all-50" id="description2"></div>
+        </div>
     </div>
 </div>
-</div>
 
-
-
+<!-- more ink links? -->
 <link rel="stylesheet" type="text/css" href="https://ink.global.ssl.fastly.net/3.1.10//css/ink.css"></script> 
-    <script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js"></script> 
-    <script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/autoload.js"></script>
+<script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js"></script> 
+<script type="text/javascript" src="https://ink.global.ssl.fastly.net/3.1.10/js/autoload.js"></script>
     
 <!-- Js files -->
   <script src="assets/javascript/quiz.js"></script>
