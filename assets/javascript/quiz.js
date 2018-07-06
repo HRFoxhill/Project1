@@ -432,6 +432,8 @@ $(document).ready(function () {
         console.log("Your Hero: " + userChar);
         console.log("Your opposite: " + lessChar);
 
+        $("#modal-error").text("Quiz Complete"); // update text on modal to display error message
+
         $("#quiz-results").html(
             `<div class="ink-grid">
                 <div class="column-group">
