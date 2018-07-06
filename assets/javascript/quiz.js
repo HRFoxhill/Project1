@@ -22,10 +22,10 @@ $(document).ready(function () {
     $("#quiz-questions").show();
 
     // question array (hold our question objects)
-    var questions = [ // TODO: fill with real question and answer
+    var questions = [
 
         {   //Q.1
-            question: "What is your favorite color",
+            question: "What is your favorite color?",
             answer: ["Black", "Red", "Blue", "Green"],
             anScore: [
                 [-5, 5, 7, 4, 6, 0, 9, -5, 8, -5, -7, 0, 1, 0, 10, 8, -5, 4, -10, -10, 2],
@@ -48,7 +48,7 @@ $(document).ready(function () {
         },
 
         {   //Q.3
-            question: "What is your favorite weapon",
+            question: "What is your favorite weapon?",
             answer: ["Hammer", "Energy beams", "Gun", "Bare Hands"],
             anScore: [
                 [10, -5, -9, 8, -6, -2, 7, -4, -9, 8, 9, 0, 4, 2, 8, -5, -5, 6, 10, -9, -8],
@@ -70,7 +70,7 @@ $(document).ready(function () {
         },
 
         {   //Q.5
-            question: "What would you do if you caught someone stealing",
+            question: "What would you do if you caught someone stealing?",
             answer: ["Cut off their hand", "Tackle them", "Tell them \"Don't\"", "Ignore it"],
             anScore: [
                 [-5, 5, 7, 4, 6, 0, 9, -5, 8, -5, -7, 0, 1, 0, 10, 8, -5, 4, -10, -10, 2]
@@ -92,7 +92,7 @@ $(document).ready(function () {
         },
 
         {   //Q.7
-            question: "How do you like to work",
+            question: "How do you like to work?",
             answer: ["Alone", "As a leader", "As an underdog", "With my best friend"],
             anScore: [
                 [-5, 8, 2, -2, 1, 9, 9, -5, 8, -5, -7, 0, 1, 0, 10, -2, -5, 5, -10, -10, 8]
@@ -259,7 +259,12 @@ $(document).ready(function () {
 
         // // create question 
         var quest = $("<h3>");
-        quest.text(questions[ind].question);
+
+        var qNum = parseInt(ind) +1; // find the question number
+        quest.attr("data-question",qNum) // save question number
+        quest.attr("data-answered",true) // data field to change color of answer if not submitted
+
+        quest.text(qNum+") "+questions[ind].question); // add question to form
 
         //console.log("Q"+ind+": "+questions[ind].question);
 
@@ -316,12 +321,18 @@ $(document).ready(function () {
 
         // run validation
         let curValidation = true;
+        let errorMessage = "";
         for (let q = 0; q <= 19; q++) {
             let questionid = "" + q;
 
             let theValue = $("input:radio[name='" + questionid + "']:checked").val();
             if (!theValue){
-                console.log("VALIDATION FAILED!");
+
+                let qNum = q +1; // find question number that was not submitted
+                errorMessage = "You need to submit an answer for question "+qNum+"."; // inform user
+
+
+                console.log("Question "+qNum+" not submitted!");
                 curValidation = false;
             }
                
@@ -406,38 +417,24 @@ $(document).ready(function () {
         console.log("Your Hero: " + userChar);
         console.log("Your opposite: " + lessChar);
 
+        $("#quiz-results").html(
+            `<div class="ink-grid">
+                <div class="column-group">
+                    <div class="all-35" id="container1"></div>
+                    <div class="all-30"><canvas class="canvasStyle" id="myChart" width="200" height="200"></canvas></div>
+                    <div class="all-35" id="container2"></div>
+                </div>
+                <div class="column-group">
+                    <div class="all-50" id="description1"></div>
+                    <div class="all-50" id="description2"></div>
+                </div>
+                <div class="column-group">
+                    <div class="all-50" id="details1"></div>
+                    <div class="all-50" id="details2"></div>
+            </div>
+            </div>`);
 
-        // Testing purpose 
-        //========================
-        // var userChar = "Groot";
-        // var lessChar = "DareDevil";
-
-
-
-        // var HERO = $("<h1>");
-        // HERO.text("Your matched character : "+userChar+" || "+"  Your least character : "+lessChar);
-
-        // $("#quiz-results").append(HERO);
-
-        // ============ CREATE PAGE JQUERY =====================
-
-        $("#quiz-results").html(`<div class="ink-grid">
-                                    <div class="column-group">
-                                        <div class="all-35" id="container1"></div>
-                                        <div class="all-30"><canvas class="canvasStyle" id="myChart" width="200" height="200"></canvas></div>
-                                        <div class="all-35" id="container2"></div>
-                                    </div>
-                                    <div class="column-group">
-                                        <div class="all-50" id="description1"></div>
-                                        <div class="all-50" id="description2"></div>
-                                    </div>
-                                    <div class="column-group">
-                                        <div class="all-50" id="details1"></div>
-                                        <div class="all-50" id="details2"></div>
-                                </div>
-                                </div>`);
-
-        // todo: get marvel info            
+              
         var id = getCharacterId(userChar);
         var id2 = getCharacterId(lessChar);
         console.log(id);
@@ -448,14 +445,8 @@ $(document).ready(function () {
         console.log("helllooooo ", userCharData);
         superHeroApiRequest(id2, "#container2", "Your least character");
 
-
         comicVineApiRequest(userChar, 1);
         comicVineApiRequest(lessChar, 2);
-
-        // todo: get movie/gif info
-
-
-
 
         // Ink UI form Data Validation
         Ink.requireModules(['Ink.Util.Validator_1', 'Ink.Dom.Event_1'], function (FormValidator, InkEvent) {
@@ -488,8 +479,15 @@ $(document).ready(function () {
     }
     else{
         // error: user didn't enter all questions
-        alert("Missing Answer");
-        // TODO add modal with error
+       
+        // set up modal to display
+        Ink.requireModules( ['Ink.Dom.Selector_1','Ink.UI.Modal_1'], function( Selector, Modal ){
+            var modalElement = Ink.s('#errorModal');
+            var modalObj = new Modal( modalElement );
+        });
+
+        $("#modal-error").text(errorMessage); // update text on modal to display error message
+        
     }
 
     }); // end submit
