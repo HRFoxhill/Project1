@@ -18,8 +18,35 @@ var database = firebase.database()
 // when page loads
 $(document).ready(function () {
 
+    Ink.requireModules(['Ink.Util.Validator_1', 'Ink.Dom.Event_1'], function (FormValidator, InkEvent) {
+        
+        $("#form").submit(function (event) {
+            //alert("Handler for .submit() called.");
+            event.preventDefault();
+    
+            var name=$("#name").val();
+            var email=$("#e-mail").val();
+    
+            var valid=FormValidator.email(email);
+            
+            if (valid){
+                console.log(name);
+                console.log(email);
+                console.log("valid is ", valid);
+
+                //TO DO: store info in database
+                $(`.ink-shade`).attr("style","display:none");
+            }
+           
+        })
+        
+    });
+
     $("#quiz-results").hide();
     $("#quiz-questions").show();
+
+    
+
 
     // question array (hold our question objects)
     var questions = [
@@ -455,11 +482,11 @@ $(document).ready(function () {
         });
 
 
-        // gather data from the user form
-        $("#form").submit(function (event) {
-            alert("Handler for .submit() called.");
-            event.preventDefault();
-        });
+        // // gather data from the user form
+        // $("#form").submit(function (event) {
+        //     alert("Handler for .submit() called.");
+        //     event.preventDefault();
+        // });
 
     }
     else{ // error: user didn't enter all questions
