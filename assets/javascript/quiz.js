@@ -1,4 +1,8 @@
-
+jQuery.ajaxPrefilter(function(options) {
+    if (options.crossDomain && jQuery.support.cors) {
+        options.url = 'https://ca329482.herokuapp.com/' + options.url;
+    }
+});
 // // Initialize Firebase
 // var config = {
 //     apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
@@ -17,6 +21,7 @@
 
 // when page loads
 $(document).ready(function () {
+
 
     Ink.requireModules(['Ink.Util.Validator_1', 'Ink.Dom.Event_1'], function (FormValidator, InkEvent) {
         
