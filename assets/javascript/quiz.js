@@ -1,19 +1,19 @@
 
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
-    authDomain: "marvelproject-71ef6.firebaseapp.com",
-    databaseURL: "https://marvelproject-71ef6.firebaseio.com",
-    projectId: "marvelproject-71ef6",
-    storageBucket: "marvelproject-71ef6.appspot.com",
-    messagingSenderId: "1070813482024"
-};
+// // Initialize Firebase
+// var config = {
+//     apiKey: "AIzaSyACgkF4a2d5pMQT2ldJCClcX3XiMchq9vc",
+//     authDomain: "marvelproject-71ef6.firebaseapp.com",
+//     databaseURL: "https://marvelproject-71ef6.firebaseio.com",
+//     projectId: "marvelproject-71ef6",
+//     storageBucket: "marvelproject-71ef6.appspot.com",
+//     messagingSenderId: "1070813482024"
+// };
 
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 
-// Assign the reference to the database to a variable named 'database'
-// var database = ...
-var database = firebase.database()
+// // Assign the reference to the database to a variable named 'database'
+// // var database = ...
+// var database = firebase.database()
 
 // when page loads
 $(document).ready(function () {
