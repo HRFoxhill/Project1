@@ -1,5 +1,5 @@
-const token=config.TOKEN_SH;
-const MY_API=config.APIKEY_CV;
+const token='10160469589180514'
+const MY_API='f9be3c08fb84c5acd562bffdc4a02e8ee1092509';
 
 var index;
 var datasetChars=[];
