@@ -35,7 +35,9 @@ $(document).ready(function () {
                 console.log("valid is ", valid);
 
                 //TO DO: store info in database
-                $(`.ink-shade`).attr("style","display:none");
+               // $(`.ink-shade`).attr("style","display:none;");
+               $("#submit-modal").attr("value","close");
+               $("#submit-modal").addClass("ink-dismiss");
             }
            
         })
