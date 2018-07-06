@@ -257,13 +257,12 @@ $(document).ready(function () {
         // create div for each question
         var qLine = $("<li>");
 
-        // // create question 
-        var quest = $("<h3>");
+        // create question h3
+        var quest = $("<h5>");
 
         var qNum = parseInt(ind) +1; // find the question number
-        quest.attr("data-question",qNum) // save question number
-        quest.attr("data-answered",true) // data field to change color of answer if not submitted
-
+        quest.attr("data-question",qNum) // add question number data
+       
         quest.text(qNum+") "+questions[ind].question); // add question to form
 
         //console.log("Q"+ind+": "+questions[ind].question);
@@ -274,8 +273,10 @@ $(document).ready(function () {
         // add answers
         for (var j in questions[ind].answer) {
 
-
-            qLine.append("<br>"); // add break
+            if(parseInt(j) > 0){
+                qLine.append("<br>"); // add break
+            }
+           
 
             // create radio button
             var radButton = $("<input>")
@@ -330,6 +331,8 @@ $(document).ready(function () {
 
                 let qNum = q +1; // find question number that was not submitted
                 errorMessage = "You need to submit an answer for question "+qNum+"."; // inform user
+
+                
 
 
                 console.log("Question "+qNum+" not submitted!");
